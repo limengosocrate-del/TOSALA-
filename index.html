@@ -92,21 +92,22 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 <div class="field"><label>Postnom *</label><input name="postName" required placeholder="Votre postnom"></div>
 <div class="field"><label>Prénom *</label><input name="firstName" required placeholder="Votre prénom"></div>
 <div class="field"><label>Téléphone *</label><input name="phone" required type="tel" placeholder="+243…"></div>
+<div class="field full"><label>Adresse e-mail *</label><input name="email" required type="email" autocomplete="email" placeholder="exemple@email.com"></div>
 <div class="field full"><label>Commune de résidence *</label><select name="commune" id="reg-commune" required><option value="">Choisir parmi les 24 communes</option></select></div>
 <div class="field full"><label>Quartier (facultatif)</label><input name="neighborhood" placeholder="Nom du quartier si connu"></div>
 <div class="field"><label>Mot de passe *</label><input name="password" type="password" minlength="6" required placeholder="6 caractères minimum"></div>
 <div class="field"><label>Confirmer le mot de passe *</label><input name="confirmPassword" type="password" minlength="6" required placeholder="Répéter le mot de passe"></div>
 <div class="field full"><label style="display:flex;gap:8px;align-items:flex-start;font-weight:500"><input type="checkbox" required style="width:auto;margin-top:2px"> J’accepte que mes informations soient utilisées pour traiter ma demande d’inscription et organiser les activités TOSALA.</label></div>
-</div><div class="alert-box">Votre demande sera transmise à l’administration TOSALA. L’accès aux fonctions protégées sera activé après validation. La vérification du téléphone par OTP/SMS sera raccordée au serveur dans la version de production.</div>
-<button class="btn btn-primary" type="submit" style="width:100%">Envoyer ma demande</button><p class="form-note">Les données de cette démonstration sont conservées localement dans ce navigateur. Elles ne sont pas envoyées à une administration centrale.</p><div id="register-feedback"></div>
+</div><div class="alert-box">Votre demande sera transmise à l’administration TOSALA. L’accès aux fonctions protégées sera activé après validation. Votre compte sera créé avec votre adresse e-mail. L’administration devra ensuite examiner votre demande.</div>
+<button class="btn btn-primary" type="submit" style="width:100%">Envoyer ma demande</button><p class="form-note">Votre compte et votre demande sont transmis à Supabase. Ne partagez jamais votre mot de passe.</p><div id="register-feedback"></div>
 </form></div></div></div>
 
 <!-- Connexion -->
 <div class="modal-backdrop" id="login-modal" onclick="backdropClose(event,'login-modal')"><div class="modal" style="width:min(450px,100%)"><div class="modal-head"><h2>Connexion à TOSALA</h2><button class="close" onclick="closeModal('login-modal')">×</button></div><div class="modal-body">
 <form id="login-form" onsubmit="login(event)"><div class="field"><label>Type d'accès</label><select id="login-role" onchange="toggleAdminHint()"><option value="member">Volontaire / Ambassadeur</option><option value="admin">Administrateur TOSALA</option></select></div>
-<div class="field" style="margin-top:13px"><label>Téléphone ou identifiant administrateur</label><input id="login-id" required placeholder="Téléphone ou admin"></div>
+<div class="field" style="margin-top:13px"><label>Adresse e-mail</label><input id="login-id" required type="email" autocomplete="email" placeholder="vous@exemple.com"></div>
 <div class="field" style="margin-top:13px"><label>Mot de passe</label><input id="login-password" required type="password" placeholder="Votre mot de passe"></div>
-<div class="alert-box hidden" id="admin-hint"><strong>Accès de démonstration administrateur</strong><br>Identifiant : <b>admin</b><br>Mot de passe : <b>Tosala@2026!</b><br>Changez ces identifiants avant tout déploiement réel.</div>
+<div class="alert-box hidden" id="admin-hint">L’accès administrateur sécurisé sera configuré après la création du compte administrateur dans Supabase.</div>
 <button class="btn btn-primary" type="submit" style="width:100%;margin-top:14px">Se connecter</button><div id="login-feedback"></div></form>
 </div></div></div>
 
@@ -169,14 +170,94 @@ function backdropClose(e,id){if(e.target.id===id)closeModal(id)}
 function syncRole(){}
 function toggleAdminHint(){document.getElementById("admin-hint").classList.toggle("hidden",document.getElementById("login-role").value!=="admin")}
 function fillCommunes(){const s=document.getElementById("reg-commune");COMMUNES.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;s.appendChild(o)})}
-function submitRegistration(e){e.preventDefault();const f=new FormData(e.target),role=f.get("regRole"),password=f.get("password");if(password!==f.get("confirmPassword")){document.getElementById("register-feedback").innerHTML='<p class="form-note" style="color:#bd3333">Les deux mots de passe ne correspondent pas.</p>';return}
-const phone=String(f.get("phone")).trim();if(db.requests.some(x=>x.phone===phone)){document.getElementById("register-feedback").innerHTML='<p class="form-note" style="color:#bd3333">Une demande avec ce numéro existe déjà dans cette démonstration.</p>';return}
-const req={id:"TS-"+Date.now().toString().slice(-8),role,name:[f.get("firstName"),f.get("postName"),f.get("lastName")].filter(Boolean).join(" "),phone,commune:f.get("commune"),neighborhood:f.get("neighborhood"),password,createdAt:new Date().toISOString(),status:"En attente"};
-db.requests.unshift(req);saveDB();e.target.reset();document.getElementById("register-feedback").innerHTML='<div class="success-box">Votre demande a été enregistrée. Référence : <b>'+req.id+'</b>. Elle est maintenant visible dans la boîte de réception de l’administrateur de cette démonstration.</div>';setTimeout(()=>{closeModal("register-modal")},2600)}
-function login(e){e.preventDefault();const role=document.getElementById("login-role").value,id=document.getElementById("login-id").value.trim(),pw=document.getElementById("login-password").value;
-if(role==="admin"){if(id!==ADMIN_USER||pw!==ADMIN_PASS){document.getElementById("login-feedback").innerHTML='<p class="form-note" style="color:#bd3333">Identifiants administrateur incorrects.</p>';return}currentUser={role:"admin",name:"Administrateur général TOSALA",commune:"Toutes les communes"};db.audit.unshift({action:"Connexion administrateur",date:new Date().toISOString()});saveDB();closeModal("login-modal");renderApp();return}
-const user=db.requests.find(x=>x.phone===id&&x.password===pw&&x.status==="Validée");if(!user){document.getElementById("login-feedback").innerHTML='<p class="form-note" style="color:#bd3333">Compte non trouvé, mot de passe incorrect ou demande pas encore validée par l’administration.</p>';return}currentUser={...user,role:user.role};closeModal("login-modal");renderApp()}
-function renderApp(){document.getElementById("public-page").classList.add("hidden");document.querySelector("header").classList.add("hidden");document.querySelector("footer").classList.add("hidden");const app=document.getElementById("application");app.classList.remove("hidden");app.innerHTML=currentUser.role==="admin"?adminShell():memberShell();window.scrollTo(0,0);if(currentUser.role==="admin")renderAdminHome();else renderMemberHome()}
+async function submitRegistration(e){
+  e.preventDefault();
+  const feedback=document.getElementById("register-feedback");
+  const button=e.target.querySelector('button[type="submit"]');
+  const f=new FormData(e.target);
+  const role=String(f.get("regRole"));
+  const password=String(f.get("password"));
+  if(password!==String(f.get("confirmPassword"))){
+    feedback.innerHTML='<p class="form-note" style="color:#bd3333">Les deux mots de passe ne correspondent pas.</p>';return;
+  }
+  if(!tosalaSupabase){feedback.innerHTML='<p class="form-note" style="color:#bd3333">La connexion à Supabase n’est pas disponible. Vérifiez le statut affiché en bas de l’écran.</p>';return;}
+  const email=String(f.get("email")).trim().toLowerCase();
+  const phone=String(f.get("phone")).trim();
+  const firstName=String(f.get("firstName")).trim();
+  const postName=String(f.get("postName")).trim();
+  const lastName=String(f.get("lastName")).trim();
+  const commune=String(f.get("commune"));
+  const neighborhood=String(f.get("neighborhood")||"").trim();
+  button.disabled=true;button.textContent="Création du compte…";
+  try{
+    const {data,error}=await tosalaSupabase.auth.signUp({
+      email,password,
+      options:{data:{
+        first_name:firstName,post_name:postName,last_name:lastName,
+        full_name:[firstName,postName,lastName].filter(Boolean).join(" "),
+        phone,commune,neighborhood,requested_role:role
+      }}
+    });
+    if(error) throw error;
+    if(!data.user) throw new Error("Supabase n’a pas retourné de compte utilisateur.");
+    if(!data.session){
+      feedback.innerHTML='<div class="success-box">Le compte a été créé. Supabase demande une confirmation par e-mail. Ouvrez le lien reçu, puis revenez vous connecter. La demande d’adhésion sera finalisée après confirmation.</div>';
+      return;
+    }
+    const {error:requestError}=await tosalaSupabase.from("registration_requests").insert({
+      user_id:data.user.id,role_demande:role,statut:"pending"
+    });
+    if(requestError) throw requestError;
+    feedback.innerHTML='<div class="success-box">Votre compte TOSALA est créé et votre demande a été transmise à l’administration. Vous pourrez accéder à votre espace après validation.</div>';
+    e.target.reset();
+    setTimeout(()=>closeModal("register-modal"),3500);
+  }catch(error){
+    console.error("Inscription TOSALA:",error);
+    let message=error.message||"Une erreur est survenue.";
+    if(message.toLowerCase().includes("duplicate")||message.toLowerCase().includes("already registered")) message="Cette adresse e-mail possède déjà un compte. Essayez de vous connecter.";
+    if(message.toLowerCase().includes("row-level security")) message="Compte créé, mais Supabase a bloqué l’enregistrement de la demande. Vérifiez la politique INSERT de registration_requests.";
+    feedback.innerHTML='<p class="form-note" style="color:#bd3333">'+esc(message)+'</p>';
+  }finally{
+    button.disabled=false;button.textContent="Envoyer ma demande";
+  }
+}
+async function login(e){
+  e.preventDefault();
+  const feedback=document.getElementById("login-feedback");
+  const role=document.getElementById("login-role").value;
+  const email=document.getElementById("login-id").value.trim().toLowerCase();
+  const pw=document.getElementById("login-password").value;
+  if(role==="admin"){
+    feedback.innerHTML='<p class="form-note" style="color:#bd3333">L’accès administrateur sécurisé sera activé après la création du premier compte administrateur dans Supabase. Le mode administrateur local est désactivé ici.</p>';
+    return;
+  }
+  if(!tosalaSupabase){feedback.innerHTML='<p class="form-note" style="color:#bd3333">Connexion Supabase indisponible. Vérifiez le statut affiché en bas de l’écran.</p>';return;}
+  const button=e.target.querySelector('button[type="submit"]');
+  button.disabled=true;button.textContent="Connexion…";
+  try{
+    const {data,error}=await tosalaSupabase.auth.signInWithPassword({email,password:pw});
+    if(error) throw error;
+    const user=data.user;
+    const meta=user.user_metadata||{};
+    const {data:profile,error:profileError}=await tosalaSupabase.from("profiles").select("*").eq("id",user.id).maybeSingle();
+    if(profileError) throw profileError;
+    if(!profile || !["ambassador","volunteer","admin"].includes(profile.role)){
+      await tosalaSupabase.auth.signOut();
+      throw new Error("Votre compte est connecté, mais il n’est pas encore validé par l’administration TOSALA.");
+    }
+    currentUser={
+      id:user.id,email:user.email,role:profile.role,
+      name:meta.full_name||[meta.first_name,meta.post_name,meta.last_name].filter(Boolean).join(" ")||user.email,
+      phone:meta.phone||"",commune:meta.commune||"Commune à confirmer"
+    };
+    closeModal("login-modal");renderApp();
+  }catch(error){
+    console.error("Connexion TOSALA:",error);
+    feedback.innerHTML='<p class="form-note" style="color:#bd3333">'+esc(error.message||"Connexion impossible.")+'</p>';
+  }finally{
+    button.disabled=false;button.textContent="Se connecter";
+  }
+}
 function adminShell(){return `<div class="app-shell"><div class="app-header"><a class="brand" href="#" onclick="returnToPublic();return false"><span class="logo">T</span><span><strong>TOSALA ADMIN</strong><small>SUPERVISION GÉNÉRALE · KINSHASA</small></span></a><div class="app-user"><span class="avatar">A</span><span>${esc(currentUser.name)}<small style="display:block;color:#728078;font-weight:500">Super-administrateur</small></span><button class="btn btn-outline btn-sm" onclick="logout()">Déconnexion</button></div></div><div class="app-body"><aside class="sidebar"><div class="side-label">ADMINISTRATION CENTRALE</div><button class="side-link active" data-view="home" onclick="adminView('home',this)">▦ &nbsp; Tableau de bord</button><button class="side-link" data-view="requests" onclick="adminView('requests',this)">✉ &nbsp; Demandes d'inscription <span id="pending-count"></span></button><button class="side-link" data-view="reports" onclick="adminView('reports',this)">⚑ &nbsp; Signalements</button><button class="side-link" data-view="communes" onclick="adminView('communes',this)">⌖ &nbsp; 24 communes</button><button class="side-link" data-view="planning" onclick="adminView('planning',this)">▣ &nbsp; Planning Salongo</button><button class="side-link" data-view="settings" onclick="adminView('settings',this)">⚙ &nbsp; Paramètres</button></aside><main class="app-main" id="admin-content"></main></div></div>`}
 function memberShell(){const title=currentUser.role==="ambassador"?"ESPACE AMBASSADEUR":"ESPACE VOLONTAIRE";return `<div class="app-shell"><div class="app-header"><a class="brand" href="#" onclick="returnToPublic();return false"><span class="logo">T</span><span><strong>TOSALA</strong><small>${title}</small></span></a><div class="app-user"><span class="avatar">${esc(currentUser.name[0]||"U")}</span><span>${esc(currentUser.name)}<small style="display:block;color:#728078;font-weight:500">${esc(currentUser.commune)}</small></span><button class="btn btn-outline btn-sm" onclick="logout()">Déconnexion</button></div></div><div class="app-body"><aside class="sidebar"><div class="side-label">MON ESPACE</div><button class="side-link active" onclick="memberView('home',this)">▦ &nbsp; Accueil</button><button class="side-link" onclick="memberView('map',this)">⌖ &nbsp; Carte de Kinshasa</button><button class="side-link" onclick="memberView('planning',this)">▣ &nbsp; Planning Salongo</button><button class="side-link" onclick="memberView('reports',this)">⚑ &nbsp; Mes signalements</button><button class="side-link" onclick="memberView('profile',this)">◉ &nbsp; Mon profil</button></aside><main class="app-main" id="member-content"></main></div></div>`}
 function adminView(view,el){document.querySelectorAll(".sidebar .side-link").forEach(x=>x.classList.remove("active"));if(el)el.classList.add("active");if(view==="home")renderAdminHome();if(view==="requests")renderRequests();if(view==="reports")renderAdminReports();if(view==="communes")renderAdminCommunes();if(view==="planning")renderAdminPlanning();if(view==="settings")renderAdminSettings()}
