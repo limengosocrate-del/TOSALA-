@@ -111,8 +111,50 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 </div></div></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const COMMUNES=["Bandalungwa","Barumbu","Bumbu","Gombe","Kalamu","Kasa-Vubu","Kimbanseke","Kinshasa","Kintambo","Kisenso","Lemba","Limete","Lingwala","Makala","Maluku","Masina","Matete","Mont-Ngafula","Ndjili","Ngaba","Ngaliema","Ngiri-Ngiri","Nsele","Selembao"];
+// Configuration publique Supabase TOSALA.
+// IMPORTANT : utiliser l'URL racine du projet, sans /rest/v1/.
+const SUPABASE_URL="https://utuihvmfmfaryucppdwj.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_xH0RGaZl1lvNKm1pZY3HaA__b3_ltRb";
+let tosalaSupabase=null;
+let supabaseConnectionState="checking";
+function initSupabaseConnection(){
+  try{
+    if(!window.supabase || !window.supabase.createClient) throw new Error("Bibliothèque Supabase indisponible. Vérifiez votre connexion Internet.");
+    tosalaSupabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+    checkSupabaseConnection();
+  }catch(error){
+    supabaseConnectionState="error";
+    console.error("TOSALA Supabase:",error);
+    showSupabaseConnection("Connexion Supabase indisponible : "+error.message,false);
+  }
+}
+async function checkSupabaseConnection(){
+  try{
+    const {count,error}=await tosalaSupabase.from("communes").select("*",{count:"exact",head:true});
+    if(error) throw error;
+    supabaseConnectionState="connected";
+    showSupabaseConnection("Base TOSALA connectée · "+count+" communes trouvées",true);
+  }catch(error){
+    supabaseConnectionState="error";
+    console.error("Erreur de connexion Supabase:",error);
+    showSupabaseConnection("Connexion établie au projet, mais lecture des communes refusée : "+(error.message||"vérifiez les droits SQL"),false);
+  }
+}
+function showSupabaseConnection(message,ok){
+  let el=document.getElementById("supabase-status");
+  if(!el){
+    el=document.createElement("div");
+    el.id="supabase-status";
+    el.style.cssText="position:fixed;z-index:9999;bottom:12px;left:12px;right:12px;padding:10px 14px;border-radius:10px;font:600 12px Arial,sans-serif;box-shadow:0 4px 18px #0002";
+    document.body.appendChild(el);
+  }
+  el.textContent=message;
+  el.style.background=ok?"#e7f7ed":"#fff2e8";
+  el.style.color=ok?"#176b39":"#8a3d13";
+}
 const STORAGE_KEY="tosala_demo_v1";
 const ADMIN_USER="admin", ADMIN_PASS="Tosala@2026!";
 let db=loadDB(), currentUser=null, currentSlide=0, slideTimer=null, map=null, mapMarker=null;
@@ -199,6 +241,7 @@ function logout(){currentUser=null;document.getElementById("application").classL
 function exportData(){const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="tosala-demo-data.json";a.click();URL.revokeObjectURL(url)}
 function createLeafletMap(id){const el=document.getElementById(id);if(!el||!window.L)return;const m=L.map(id).setView([-4.325,15.322],11);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m);m.on("click",e=>{L.popup().setLatLng(e.latlng).setContent(`<b>Point sélectionné</b><br>Latitude : ${e.latlng.lat.toFixed(5)}<br>Longitude : ${e.latlng.lng.toFixed(5)}<br><small>Choisissez ensuite la commune correspondante dans le répertoire.</small>`).openOn(m)});return m}
 function initMap(){if(!document.getElementById("kinshasa-map")||!window.L||map)return;map=createLeafletMap("kinshasa-map")}
+document.addEventListener("DOMContentLoaded",()=>{initSupabaseConnection();});
 function resetMap(){if(map)map.setView([-4.325,15.322],11)}
 function selectCommune(name,btn){document.querySelectorAll(".commune-btn").forEach(b=>b.classList.remove("selected"));if(btn)btn.classList.add("selected");const detail=document.getElementById("commune-detail");detail.innerHTML=`<strong>${esc(name)}</strong><p>Commune de la ville-province de Kinshasa.<br>Quartiers référencés : <b>à renseigner</b><br>Avenues référencées : <b>à renseigner</b><br>Bourgmestre vérifié : <b>à confirmer</b><br>Signalements et opérations : données disponibles après connexion à la base centrale.</p>`;if(map){map.setView([-4.325,15.322],11);}}
 function renderCommuneButtons(filter=""){const box=document.getElementById("commune-list");if(!box)return;box.innerHTML=COMMUNES.filter(c=>c.toLowerCase().includes(filter.toLowerCase())).map(c=>`<button class="commune-btn" onclick="selectCommune('${c}',this)">${esc(c)}</button>`).join("")}
