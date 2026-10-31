@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#087443">
-<title>TOSALA — Kinshasa propre, notre responsabilité à tous</title>
+<title>TOSALA V15 — Kinshasa propre, notre responsabilité à tous</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@ footer{background:#0b2f20;color:#d9e9df;padding:35px 0;margin-top:35px}.footer-i
 .modal-backdrop{position:fixed;inset:0;background:#061c12a8;z-index:3000;display:none;align-items:center;justify-content:center;padding:16px;overflow:auto}.modal-backdrop.show{display:flex}.modal{background:white;border-radius:20px;width:min(560px,100%);max-height:94vh;overflow:auto;box-shadow:0 25px 80px #0004}.modal-head{padding:21px 23px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.modal-head h2{font:800 20px Manrope;margin:0}.close{border:0;background:#f0f4f1;width:34px;height:34px;border-radius:50%;font-size:20px;color:#385246}.modal-body{padding:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:800;color:#46584e}.field input,.field select,.field textarea{width:100%;border:1px solid #dce6df;border-radius:10px;padding:12px;background:#fff;outline:none;font-size:13px}.field input:focus,.field select:focus,.field textarea:focus{border-color:#53a879;box-shadow:0 0 0 3px #08744312}.form-note{font-size:11px;color:#738078;line-height:1.55}.role-choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.role-choice label{border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;gap:9px;align-items:flex-start;cursor:pointer}.role-choice label:has(input:checked){border-color:var(--green);background:#eff8f2}.role-choice strong{font-size:12px;display:block}.role-choice small{font-size:10px;color:var(--muted);display:block;margin-top:4px}.alert-box{padding:11px 13px;border-radius:10px;background:#fff7e8;color:#85550c;font-size:11px;line-height:1.55;margin:12px 0}.success-box{padding:12px;background:#eaf7ef;color:#12643c;border-radius:10px;font-size:12px}
 .app-shell{min-height:100vh;background:#f3f6f4}.app-header{height:68px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 3%;position:sticky;top:0;z-index:500}.app-user{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800}.avatar{width:36px;height:36px;background:#e5f4ea;color:var(--green);border-radius:50%;display:grid;place-items:center;font-weight:900}.app-body{display:grid;grid-template-columns:245px 1fr;min-height:calc(100vh - 68px)}.sidebar{background:#103d2a;color:#d7e8dd;padding:22px 14px}.side-label{font-size:10px;letter-spacing:1.5px;color:#8fb5a0;font-weight:800;padding:12px}.side-link{width:100%;border:0;background:transparent;color:#d7e8dd;text-align:left;padding:12px;border-radius:9px;font-size:12px;font-weight:700;margin:2px 0}.side-link.active,.side-link:hover{background:#ffffff19;color:white}.app-main{padding:26px;min-width:0}.app-title{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.app-title h1{font:800 25px Manrope;margin:0}.app-title p{font-size:12px;color:var(--muted);margin:5px 0 0}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:17px}.metric{background:white;border:1px solid var(--line);border-radius:14px;padding:17px}.metric span{font-size:11px;color:var(--muted)}.metric strong{display:block;font:800 27px Manrope;margin-top:8px}.dash-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}.panel{padding:18px}.panel h3{font:800 16px Manrope;margin:0 0 12px}.panel p{font-size:12px;color:var(--muted);line-height:1.6}.request-item,.list-item{border:1px solid var(--line);padding:13px;border-radius:11px;margin:9px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.request-item strong,.list-item strong{font-size:12px}.request-item small,.list-item small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.pill{font-size:10px;font-weight:800;border-radius:20px;padding:5px 8px;background:#fff3dc;color:#91620d}.pill.ok{background:#e7f7ed;color:#167344}.pill.no{background:#ffeded;color:#b43838}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:11px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:#6d7b73;font-size:10px;text-transform:uppercase;letter-spacing:.5px}.empty{padding:24px;text-align:center;color:var(--muted);font-size:12px}.back-row{margin-bottom:15px}.back-row button{border:1px solid var(--line);background:white;border-radius:9px;padding:9px 13px;color:#345044;font-weight:800;font-size:12px}
 @media(max-width:900px){.navlinks{display:none}.quick-grid{grid-template-columns:repeat(2,1fr)}.map-layout{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,1fr)}.dash-grid{grid-template-columns:1fr}.app-body{grid-template-columns:1fr}.sidebar{display:flex;overflow:auto;padding:8px;gap:5px}.side-label{display:none}.side-link{white-space:nowrap;width:auto}.app-main{padding:16px}}
-@media(max-width:600px){.topbar .container span:last-child{display:none}.nav-actions .btn-outline{display:none}.slider{height:480px;border-radius:18px}.hero-content{left:7%;width:86%}.hero p{font-size:14px}.section{padding:30px 0}.section-head{display:block}.quick-grid{gap:9px}.quick-card{padding:14px}.quick-card h3{font-size:14px}.role-grid{grid-template-columns:1fr}.role-card p{min-height:0}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.role-choice{grid-template-columns:1fr}.footer-inner{display:block}.app-title{align-items:flex-start;flex-direction:column}.metric strong{font-size:23px}}
+@media(max-width:600px){.topbar .container span:last-child{display:none}.nav-actions .btn-outline{display:inline-flex}.slider{height:480px;border-radius:18px}.hero-content{left:7%;width:86%}.hero p{font-size:14px}.section{padding:30px 0}.section-head{display:block}.quick-grid{gap:9px}.quick-card{padding:14px}.quick-card h3{font-size:14px}.role-grid{grid-template-columns:1fr}.role-card p{min-height:0}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.role-choice{grid-template-columns:1fr}.footer-inner{display:block}.app-title{align-items:flex-start;flex-direction:column}.metric strong{font-size:23px}}
 
 .report-inbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
 .report-card{min-width:0}
@@ -95,19 +96,22 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 <div class="field full"><label>Adresse e-mail *</label><input name="email" required type="email" autocomplete="email" placeholder="exemple@email.com"></div>
 <div class="field full"><label>Commune de résidence *</label><select name="commune" id="reg-commune" required><option value="">Choisir parmi les 24 communes</option></select></div>
 <div class="field full"><label>Quartier (facultatif)</label><input name="neighborhood" placeholder="Nom du quartier si connu"></div>
+<div class="field full"><label>Avenue (facultatif)</label><input name="avenue" placeholder="Nom de l’avenue et, si possible, numéro"></div>
 <div class="field"><label>Mot de passe *</label><input name="password" type="password" minlength="6" required placeholder="6 caractères minimum"></div>
 <div class="field"><label>Confirmer le mot de passe *</label><input name="confirmPassword" type="password" minlength="6" required placeholder="Répéter le mot de passe"></div>
 <div class="field full"><label style="display:flex;gap:8px;align-items:flex-start;font-weight:500"><input type="checkbox" required style="width:auto;margin-top:2px"> J’accepte que mes informations soient utilisées pour traiter ma demande d’inscription et organiser les activités TOSALA.</label></div>
 </div><div class="alert-box">Votre demande sera transmise à l’administration TOSALA. L’accès aux fonctions protégées sera activé après validation. Votre compte sera créé avec votre adresse e-mail. L’administration devra ensuite examiner votre demande.</div>
 <button class="btn btn-primary" type="submit" style="width:100%">Envoyer ma demande</button><p class="form-note">Votre compte et votre demande sont transmis à Supabase. Ne partagez jamais votre mot de passe.</p><div id="register-feedback"></div>
+<p class="form-note" style="text-align:center;margin-top:14px">Vous avez déjà un compte ?
+<button type="button" class="btn btn-outline btn-sm" onclick="openLogin()" style="margin-left:6px">Se connecter</button></p>
 </form></div></div></div>
 
 <!-- Connexion -->
 <div class="modal-backdrop" id="login-modal" onclick="backdropClose(event,'login-modal')"><div class="modal" style="width:min(450px,100%)"><div class="modal-head"><h2>Connexion à TOSALA</h2><button class="close" onclick="closeModal('login-modal')">×</button></div><div class="modal-body">
-<form id="login-form" onsubmit="login(event)"><div class="field"><label>Type d'accès</label><select id="login-role" onchange="toggleAdminHint()"><option value="member">Volontaire / Ambassadeur</option><option value="admin">Administrateur TOSALA</option></select></div>
+<form id="login-form" onsubmit="login(event)"><div class="field"><label>Connexion</label><select id="login-role" onchange="toggleAdminHint()"><option value="volunteer">Volontaire</option><option value="ambassador">Ambassadeur</option><option value="admin">Administrateur</option></select></div>
 <div class="field" style="margin-top:13px"><label>Adresse e-mail</label><input id="login-id" required type="email" autocomplete="email" placeholder="vous@exemple.com"></div>
 <div class="field" style="margin-top:13px"><label>Mot de passe</label><input id="login-password" required type="password" placeholder="Votre mot de passe"></div>
-<div class="alert-box hidden" id="admin-hint">L’accès administrateur sécurisé sera configuré après la création du compte administrateur dans Supabase.</div>
+<div class="alert-box hidden" id="admin-hint">Choisissez le type de compte correspondant à votre profil approuvé. Le système vérifiera automatiquement votre rôle.</div>
 <button class="btn btn-primary" type="submit" style="width:100%;margin-top:14px">Se connecter</button><div id="login-feedback"></div></form>
 </div></div></div>
 
@@ -175,47 +179,80 @@ async function submitRegistration(e){
   const feedback=document.getElementById("register-feedback");
   const button=e.target.querySelector('button[type="submit"]');
   const f=new FormData(e.target);
-  const role=String(f.get("regRole"));
-  const password=String(f.get("password"));
-  if(password!==String(f.get("confirmPassword"))){
+  const role=String(f.get("regRole")||"").trim();
+  const password=String(f.get("password")||"");
+  if(password!==String(f.get("confirmPassword")||"")){
     feedback.innerHTML='<p class="form-note" style="color:#bd3333">Les deux mots de passe ne correspondent pas.</p>';return;
   }
+  if(!["ambassador","volunteer"].includes(role)){
+    feedback.innerHTML='<p class="form-note" style="color:#bd3333">Choisissez un type de compte valide.</p>';return;
+  }
   if(!tosalaSupabase){feedback.innerHTML='<p class="form-note" style="color:#bd3333">La connexion à Supabase n’est pas disponible. Vérifiez le statut affiché en bas de l’écran.</p>';return;}
-  const email=String(f.get("email")).trim().toLowerCase();
-  const phone=String(f.get("phone")).trim();
-  const firstName=String(f.get("firstName")).trim();
-  const postName=String(f.get("postName")).trim();
-  const lastName=String(f.get("lastName")).trim();
-  const commune=String(f.get("commune"));
+  const email=String(f.get("email")||"").trim().toLowerCase();
+  const phone=String(f.get("phone")||"").trim();
+  const firstName=String(f.get("firstName")||"").trim();
+  const postName=String(f.get("postName")||"").trim();
+  const lastName=String(f.get("lastName")||"").trim();
+  const fullName=[firstName,postName,lastName].filter(Boolean).join(" ");
+  const commune=String(f.get("commune")||"").trim();
   const neighborhood=String(f.get("neighborhood")||"").trim();
-  button.disabled=true;button.textContent="Création du compte…";
+  const avenue=String(f.get("avenue")||"").trim();
+  if(!email||!phone||!fullName||!commune){
+    feedback.innerHTML='<p class="form-note" style="color:#bd3333">Veuillez renseigner le nom complet, le téléphone, l’adresse e-mail et la commune.</p>';return;
+  }
+  button.disabled=true;button.textContent="Vérification des informations…";
   try{
+    // La commune doit être résolue depuis le référentiel Supabase : aucune inscription avec commune_id NULL.
+    const {data:communeRow,error:communeLookupError}=await tosalaSupabase
+      .from("communes").select("id,nom").eq("nom",commune).maybeSingle();
+    if(communeLookupError)throw new Error("Impossible de vérifier la commune : "+communeLookupError.message);
+    if(!communeRow||communeRow.id===null||communeRow.id===undefined)
+      throw new Error("La commune sélectionnée n’existe pas dans le référentiel TOSALA. Actualisez la page et réessayez.");
+    const communeId=Number(communeRow.id);
+    if(!Number.isInteger(communeId))throw new Error("L’identifiant de la commune est invalide.");
+
+    button.textContent="Création du compte…";
     const {data,error}=await tosalaSupabase.auth.signUp({
       email,password,
       options:{data:{
         first_name:firstName,post_name:postName,last_name:lastName,
-        full_name:[firstName,postName,lastName].filter(Boolean).join(" "),
-        phone,commune,neighborhood,requested_role:role
+        full_name:fullName,phone,commune,commune_id:communeId,
+        neighborhood,avenue,requested_role:role
       }}
     });
-    if(error) throw error;
-    if(!data.user) throw new Error("Supabase n’a pas retourné de compte utilisateur.");
-    if(!data.session){
-      feedback.innerHTML='<div class="success-box">Le compte a été créé. Supabase demande une confirmation par e-mail. Ouvrez le lien reçu, puis revenez vous connecter. La demande d’adhésion sera finalisée après confirmation.</div>';
-      return;
+    if(error)throw error;
+    const user=data&&data.user;
+    if(!user||!user.id)throw new Error("Supabase n’a pas retourné l’identifiant du compte. Vérifiez la confirmation de l’adresse e-mail, puis réessayez.");
+
+    button.textContent="Enregistrement de la demande…";
+    const requestPayload={
+      user_id:user.id,
+      nom_complet:fullName,
+      email:email,
+      telephone:phone,
+      commune_id:communeId,
+      avenue:avenue||null,
+      role_demande:role,
+      statut:"pending"
+    };
+    const {data:createdRequest,error:requestError}=await tosalaSupabase
+      .from("registration_requests").insert(requestPayload).select("id,email,telephone,commune_id").single();
+    if(requestError){
+      const requestMessage=(requestError.message||"").toLowerCase();
+      if(requestMessage.includes("duplicate key")||requestMessage.includes("already exists"))
+        throw new Error("Une demande existe déjà pour ce compte. Contactez l’administration pour vérifier son statut.");
+      throw new Error("Le compte a été créé, mais la demande n’a pas été enregistrée : "+requestError.message+". Contactez l’administration avant de refaire une inscription.");
     }
-    const {error:requestError}=await tosalaSupabase.from("registration_requests").insert({
-      user_id:data.user.id,role_demande:role,statut:"pending"
-    });
-    if(requestError) throw requestError;
-    feedback.innerHTML='<div class="success-box">Votre compte TOSALA est créé et votre demande a été transmise à l’administration. Vous pourrez accéder à votre espace après validation.</div>';
+    if(!createdRequest||!createdRequest.email||!createdRequest.telephone||Number(createdRequest.commune_id)!==communeId)
+      throw new Error("Contrôle après enregistrement échoué : certaines informations ne sont pas revenues de Supabase. Contactez l’administration.");
+
+    feedback.innerHTML='<div class="success-box">Votre compte TOSALA est créé et votre demande a été enregistrée avec votre e-mail, votre téléphone et votre commune. Vous pourrez accéder à votre espace après validation par l’administration.</div>';
     e.target.reset();
-    setTimeout(()=>closeModal("register-modal"),3500);
+    setTimeout(()=>closeModal("register-modal"),4000);
   }catch(error){
-    console.error("Inscription TOSALA:",error);
-    let message=error.message||"Une erreur est survenue.";
-    if(message.toLowerCase().includes("duplicate")||message.toLowerCase().includes("already registered")) message="Cette adresse e-mail possède déjà un compte. Essayez de vous connecter.";
-    if(message.toLowerCase().includes("row-level security")) message="Compte créé, mais Supabase a bloqué l’enregistrement de la demande. Vérifiez la politique INSERT de registration_requests.";
+    console.error("Inscription TOSALA V15:",error);
+    let message=error.message||"Une erreur est survenue pendant l’inscription.";
+    if(message.toLowerCase().includes("row-level security"))message="Supabase a bloqué l’enregistrement de la demande. Vérifiez la politique INSERT de registration_requests. Le compte peut déjà avoir été créé : ne recommencez pas immédiatement avec une autre adresse.";
     feedback.innerHTML='<p class="form-note" style="color:#bd3333">'+esc(message)+'</p>';
   }finally{
     button.disabled=false;button.textContent="Envoyer ma demande";
@@ -224,13 +261,8 @@ async function submitRegistration(e){
 async function login(e){
   e.preventDefault();
   const feedback=document.getElementById("login-feedback");
-  const role=document.getElementById("login-role").value;
   const email=document.getElementById("login-id").value.trim().toLowerCase();
   const pw=document.getElementById("login-password").value;
-  if(role==="admin"){
-    feedback.innerHTML='<p class="form-note" style="color:#bd3333">L’accès administrateur sécurisé sera activé après la création du premier compte administrateur dans Supabase. Le mode administrateur local est désactivé ici.</p>';
-    return;
-  }
   if(!tosalaSupabase){feedback.innerHTML='<p class="form-note" style="color:#bd3333">Connexion Supabase indisponible. Vérifiez le statut affiché en bas de l’écran.</p>';return;}
   const button=e.target.querySelector('button[type="submit"]');
   button.disabled=true;button.textContent="Connexion…";
@@ -239,16 +271,26 @@ async function login(e){
     if(error) throw error;
     const user=data.user;
     const meta=user.user_metadata||{};
-    const {data:profile,error:profileError}=await tosalaSupabase.from("profiles").select("*").eq("id",user.id).maybeSingle();
+    const {data:profile,error:profileError}=await tosalaSupabase.from("profiles").select("*").eq("user_id",user.id).maybeSingle();
     if(profileError) throw profileError;
-    if(!profile || !["ambassador","volunteer","admin"].includes(profile.role)){
+    if(!profile || profile.approuve !== true || !["ambassador","volunteer","admin","ambassadeur","volontaire"].includes(String(profile.role||"").toLowerCase())){
       await tosalaSupabase.auth.signOut();
-      throw new Error("Votre compte est connecté, mais il n’est pas encore validé par l’administration TOSALA.");
+      throw new Error("Votre compte est connecté, mais votre profil n’est pas encore créé ou approuvé par l’administration TOSALA.");
+    }
+    const normalizedRole=String(profile.role||"").toLowerCase();
+    const actualRole=normalizedRole==="ambassadeur"?"ambassador":normalizedRole==="volontaire"?"volunteer":normalizedRole;
+    const selectedRole=document.getElementById("login-role").value;
+    if(actualRole!==selectedRole){
+      await tosalaSupabase.auth.signOut();
+      throw new Error("Le type de compte choisi ne correspond pas à votre profil. Choisissez : "+(actualRole==="admin"?"Administrateur":actualRole==="ambassador"?"Ambassadeur":"Volontaire")+".");
     }
     currentUser={
-      id:user.id,email:user.email,role:profile.role,
-      name:meta.full_name||[meta.first_name,meta.post_name,meta.last_name].filter(Boolean).join(" ")||user.email,
-      phone:meta.phone||"",commune:meta.commune||"Commune à confirmer"
+      id:user.id,email:user.email,
+      role:actualRole,
+      name:profile.nom_complet||meta.full_name||[meta.first_name,meta.post_name,meta.last_name].filter(Boolean).join(" ")||user.email,
+      phone:profile.telephone||meta.phone||"",
+      commune:meta.commune||("Commune ID "+(profile.commune_id??"à confirmer")),
+      communeId:profile.commune_id??null
     };
     closeModal("login-modal");renderApp();
   }catch(error){
@@ -258,15 +300,126 @@ async function login(e){
     button.disabled=false;button.textContent="Se connecter";
   }
 }
-function adminShell(){return `<div class="app-shell"><div class="app-header"><a class="brand" href="#" onclick="returnToPublic();return false"><span class="logo">T</span><span><strong>TOSALA ADMIN</strong><small>SUPERVISION GÉNÉRALE · KINSHASA</small></span></a><div class="app-user"><span class="avatar">A</span><span>${esc(currentUser.name)}<small style="display:block;color:#728078;font-weight:500">Super-administrateur</small></span><button class="btn btn-outline btn-sm" onclick="logout()">Déconnexion</button></div></div><div class="app-body"><aside class="sidebar"><div class="side-label">ADMINISTRATION CENTRALE</div><button class="side-link active" data-view="home" onclick="adminView('home',this)">▦ &nbsp; Tableau de bord</button><button class="side-link" data-view="requests" onclick="adminView('requests',this)">✉ &nbsp; Demandes d'inscription <span id="pending-count"></span></button><button class="side-link" data-view="reports" onclick="adminView('reports',this)">⚑ &nbsp; Signalements</button><button class="side-link" data-view="communes" onclick="adminView('communes',this)">⌖ &nbsp; 24 communes</button><button class="side-link" data-view="planning" onclick="adminView('planning',this)">▣ &nbsp; Planning Salongo</button><button class="side-link" data-view="settings" onclick="adminView('settings',this)">⚙ &nbsp; Paramètres</button></aside><main class="app-main" id="admin-content"></main></div></div>`}
-function memberShell(){const title=currentUser.role==="ambassador"?"ESPACE AMBASSADEUR":"ESPACE VOLONTAIRE";return `<div class="app-shell"><div class="app-header"><a class="brand" href="#" onclick="returnToPublic();return false"><span class="logo">T</span><span><strong>TOSALA</strong><small>${title}</small></span></a><div class="app-user"><span class="avatar">${esc(currentUser.name[0]||"U")}</span><span>${esc(currentUser.name)}<small style="display:block;color:#728078;font-weight:500">${esc(currentUser.commune)}</small></span><button class="btn btn-outline btn-sm" onclick="logout()">Déconnexion</button></div></div><div class="app-body"><aside class="sidebar"><div class="side-label">MON ESPACE</div><button class="side-link active" onclick="memberView('home',this)">▦ &nbsp; Accueil</button><button class="side-link" onclick="memberView('map',this)">⌖ &nbsp; Carte de Kinshasa</button><button class="side-link" onclick="memberView('planning',this)">▣ &nbsp; Planning Salongo</button><button class="side-link" onclick="memberView('reports',this)">⚑ &nbsp; Mes signalements</button><button class="side-link" onclick="memberView('profile',this)">◉ &nbsp; Mon profil</button></aside><main class="app-main" id="member-content"></main></div></div>`}
-function adminView(view,el){document.querySelectorAll(".sidebar .side-link").forEach(x=>x.classList.remove("active"));if(el)el.classList.add("active");if(view==="home")renderAdminHome();if(view==="requests")renderRequests();if(view==="reports")renderAdminReports();if(view==="communes")renderAdminCommunes();if(view==="planning")renderAdminPlanning();if(view==="settings")renderAdminSettings()}
+function renderApp(){
+  document.getElementById("public-page").classList.add("hidden");
+  document.querySelector("header").classList.add("hidden");
+  document.querySelector("footer").classList.add("hidden");
+  const app=document.getElementById("application");
+  app.classList.remove("hidden");
+  if(currentUser.role==="admin"){
+    app.innerHTML=adminShell();
+    renderAdminHome();
+    adminView("requests",document.querySelector('.sidebar [data-view="requests"]'));
+  }else{
+    app.innerHTML=memberShell();
+    renderMemberHome();
+  }
+  window.scrollTo(0,0);
+}
+
+async function fetchRegistrationRequests(){
+  const {data,error}=await tosalaSupabase
+    .from("registration_requests")
+    .select("id,user_id,role_demande,nom_complet,email,telephone,commune_id,statut,created_at,avenue")
+    .order("created_at",{ascending:false});
+  if(error) throw error;
+  return data||[];
+}
+function requestStatusLabel(status){
+  return status==="pending"?"En attente":status==="approved"?"Approuvée":status==="rejected"?"Refusée":status;
+}
+async function decideSupabaseRequest(requestId,decision,button){
+  const action=decision==="approved"?"approuver":"refuser";
+  if(!confirm(`Voulez-vous vraiment ${action} cette demande ?`)) return;
+  if(button){button.disabled=true;button.textContent="Traitement…";}
+  try{
+    const functionName=decision==="approved"?"approve_registration_request":"reject_registration_request";
+    const {error}=await tosalaSupabase.rpc(functionName,{p_request_id:requestId});
+    if(error) throw error;
+    alert(decision==="approved"?"Demande approuvée. Le profil utilisateur a été créé et activé.":"Demande refusée.");
+    await renderRequests();
+  }catch(error){
+    console.error("Traitement demande TOSALA:",error);
+    alert("Opération impossible : "+(error.message||"erreur inconnue"));
+    if(button){button.disabled=false;button.textContent=decision==="approved"?"Approuver":"Refuser";}
+  }
+}
+
+function adminShell(){return `<div class="app-shell"><div class="app-header"><a class="brand" href="#" onclick="returnToPublic();return false"><span class="logo">T</span><span><strong>TOSALA ADMIN</strong><small>SUPERVISION GÉNÉRALE · KINSHASA</small></span></a><div class="app-user"><span class="avatar">A</span><span>${esc(currentUser.name)}<small style="display:block;color:#728078;font-weight:500">Super-administrateur</small></span><button class="btn btn-outline btn-sm" onclick="logout()">Déconnexion</button></div></div><div class="app-body"><aside class="sidebar"><div class="side-label">ADMINISTRATION CENTRALE</div><button class="side-link active" data-view="home" onclick="adminView('home',this)">▦ &nbsp; Tableau de bord</button><button class="side-link" data-view="requests" onclick="adminView('requests',this)">✉ &nbsp; Demandes d'inscription <span id="pending-count"></span></button><button class="side-link" data-view="reports" onclick="adminView('reports',this)">⚑ &nbsp; Signalements</button><button class="side-link" data-view="messages" onclick="adminView('messages',this)">✉ &nbsp; Boîte de réception</button><button class="side-link" data-view="communications" onclick="adminView('communications',this)">✉ &nbsp; Communications e-mail</button><button class="side-link" data-view="communes" onclick="adminView('communes',this)">⌖ &nbsp; 24 communes</button><button class="side-link" data-view="planning" onclick="adminView('planning',this)">▣ &nbsp; Planning Salongo</button><button class="side-link" data-view="settings" onclick="adminView('settings',this)">⚙ &nbsp; Paramètres</button></aside><main class="app-main" id="admin-content"></main></div></div>`}
+function memberShell(){const title=currentUser.role==="ambassador"?"ESPACE AMBASSADEUR":"ESPACE VOLONTAIRE";return `<div class="app-shell"><div class="app-header"><a class="brand" href="#" onclick="returnToPublic();return false"><span class="logo">T</span><span><strong>TOSALA</strong><small>${title}</small></span></a><div class="app-user"><span class="avatar">${esc(currentUser.name[0]||"U")}</span><span>${esc(currentUser.name)}<small style="display:block;color:#728078;font-weight:500">${esc(currentUser.commune)} · ${esc(currentUser.phone||"Téléphone non renseigné")}</small></span><button class="btn btn-outline btn-sm" onclick="logout()">Déconnexion</button></div></div><div class="app-body"><aside class="sidebar"><div class="side-label">MON ESPACE</div><button class="side-link active" onclick="memberView('home',this)">▦ &nbsp; Accueil</button><button class="side-link" onclick="memberView('map',this)">⌖ &nbsp; Carte de Kinshasa</button><button class="side-link" onclick="memberView('planning',this)">▣ &nbsp; Planning Salongo</button><button class="side-link" onclick="memberView('reports',this)">⚑ &nbsp; Mes signalements</button><button class="side-link" onclick="memberView('messages',this)">✉ &nbsp; Messages à l’administration</button><button class="side-link" onclick="memberView('profile',this)">◉ &nbsp; Mon profil</button></aside><main class="app-main" id="member-content"></main></div></div>`}
+function adminView(view,el){document.querySelectorAll(".sidebar .side-link").forEach(x=>x.classList.remove("active"));if(el)el.classList.add("active");if(view==="home")renderAdminHome();if(view==="requests")renderRequests();if(view==="reports")renderAdminReports();if(view==="messages")renderAdminMessages();if(view==="communications")renderAdminCommunications();if(view==="communes")renderAdminCommunes();if(view==="planning")renderAdminPlanning();if(view==="settings")renderAdminSettings()}
 function metrics(){const valid=db.requests.filter(x=>x.status==="Validée"),pending=db.requests.filter(x=>x.status==="En attente");return {valid,pending}}
-function renderAdminHome(){const m=metrics(),reports=db.reports;document.getElementById("admin-content").innerHTML=`<div class="app-title"><div><div class="kicker">Vue générale</div><h1>Tableau de bord administratif</h1><p>Supervision des demandes et des activités dans les 24 communes.</p></div><button class="btn btn-primary" onclick="adminView('requests')">Voir les demandes</button></div><div class="metric-grid"><div class="metric"><span>Demandes en attente</span><strong>${m.pending.length}</strong></div><div class="metric"><span>Comptes validés</span><strong>${m.valid.length}</strong></div><div class="metric"><span>Signalements reçus</span><strong>${reports.length}</strong></div><div class="metric"><span>Communes couvertes</span><strong>24</strong></div></div><div class="dash-grid"><section class="panel"><h3>Dernières demandes reçues</h3>${db.requests.slice(0,5).map(requestRow).join("")||'<div class="empty">Aucune demande reçue pour le moment.</div>'}<button class="btn btn-soft btn-sm" onclick="adminView('requests')">Ouvrir la boîte de réception →</button></section><section class="panel"><h3>Supervision TOSALA</h3><p>Les demandes des volontaires et des ambassadeurs arrivent ici. L’administrateur examine les informations avant de valider ou refuser chaque inscription.</p><div class="success-box">Les données affichées proviennent uniquement des actions effectuées dans cette démonstration locale.</div><p><b>JPS Intelligence</b><br>Le module d’alertes sera relié aux signalements, aux plannings et aux comptes rendus d’intervention.</p></section></div>`;const pc=document.getElementById("pending-count");if(pc)pc.textContent=m.pending.length?`(${m.pending.length})`:""}
+async function renderAdminHome(){
+ const content=document.getElementById("admin-content");
+ content.innerHTML=`<div class="app-title"><div><div class="kicker">Vue générale</div><h1>Tableau de bord administratif</h1><p>Indicateurs consolidés des membres et des activités TOSALA.</p></div><button class="btn btn-primary" onclick="adminView('requests')">Voir les demandes</button></div><div class="panel"><div class="empty">Actualisation des statistiques officielles…</div></div>`;
+ try{
+  const [{data:profiles,error:profileError},{data:requests,error:requestError}]=await Promise.all([
+   tosalaSupabase.from("profiles").select("role,approuve"),
+   tosalaSupabase.from("registration_requests").select("role_demande,statut")
+  ]);
+  if(profileError) throw profileError; if(requestError) throw requestError;
+  const approved=(profiles||[]).filter(p=>p.approuve===true);
+  const volunteers=approved.filter(p=>["volunteer","volontaire"].includes(String(p.role||"").toLowerCase())).length;
+  const ambassadors=approved.filter(p=>["ambassador","ambassadeur"].includes(String(p.role||"").toLowerCase())).length;
+  const pending=(requests||[]).filter(r=>r.statut==="pending").length;
+  const reports=db.reports;
+  content.innerHTML=`<div class="app-title"><div><div class="kicker">Vue générale</div><h1>Tableau de bord administratif</h1><p>Effectifs calculés à partir des profils approuvés dans la base centrale.</p></div><button class="btn btn-outline" onclick="renderAdminHome()">Actualiser les chiffres</button></div>
+  <div class="metric-grid"><div class="metric"><span>Volontaires actifs</span><strong>${volunteers}</strong><small>Profils approuvés</small></div><div class="metric"><span>Ambassadeurs actifs</span><strong>${ambassadors}</strong><small>Profils approuvés</small></div><div class="metric"><span>Demandes en attente</span><strong>${pending}</strong><small>À examiner</small></div><div class="metric"><span>Effectif total approuvé</span><strong>${approved.length}</strong><small>Volontaires + ambassadeurs + autres profils approuvés</small></div></div>
+  <div class="dash-grid"><section class="panel"><h3>Indicateurs opérationnels</h3><div class="list-item"><div><strong>Signalements visibles dans cet appareil</strong><small>Le module de signalement doit encore être centralisé dans Supabase.</small></div><b>${reports.length}</b></div><div class="list-item"><div><strong>Couverture territoriale</strong><small>Référentiel des 24 communes de Kinshasa.</small></div><b>24</b></div><button class="btn btn-soft btn-sm" onclick="adminView('requests')">Consulter les inscriptions</button></section>
+  <section class="panel"><h3>Administration et communications</h3><p>Suivez les effectifs approuvés, examinez les demandes et préparez les communications officielles aux membres.</p><p><b>Identité institutionnelle :</b> les communications sont préparées au nom du bourgmestre de la commune sélectionnée, avec son nom renseigné par l’administrateur.</p><button class="btn btn-primary btn-sm" onclick="adminView('communications')">Ouvrir les communications e-mail</button></section></div>`;
+  const pc=document.getElementById("pending-count");if(pc)pc.textContent=pending?`(${pending})`:"";
+ }catch(error){content.innerHTML+=`<div class="alert-box">Impossible de calculer les effectifs : ${esc(error.message||"Erreur inconnue")}. Vérifiez les droits de lecture de la table profiles et registration_requests.</div>`;}
+}
+
 function requestRow(x){return `<div class="request-item"><div><strong>${esc(x.name)}</strong><small>${x.role==="ambassador"?"Ambassadeur TOSALA":"Volontaire"} · ${esc(x.commune)} · ${esc(x.phone)}</small></div><span class="pill ${x.status==="Validée"?"ok":x.status==="Refusée"?"no":""}">${esc(x.status)}</span></div>`}
-function renderRequests(){const pending=db.requests.filter(x=>x.status==="En attente");document.getElementById("admin-content").innerHTML=`<div class="app-title"><div><div class="kicker">Contrôle des inscriptions</div><h1>Demandes des volontaires et ambassadeurs</h1><p>Examiner chaque demande avant d’autoriser l’accès à l’espace personnel.</p></div></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Référence</th><th>Identité</th><th>Type</th><th>Téléphone</th><th>Commune</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead><tbody>${db.requests.map(x=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name)}<br><small>${esc(x.neighborhood||"Quartier non précisé")}</small></td><td>${x.role==="ambassador"?"Ambassadeur":"Volontaire"}</td><td>${esc(x.phone)}</td><td>${esc(x.commune)}</td><td>${new Date(x.createdAt).toLocaleDateString("fr-FR")}</td><td><span class="pill ${x.status==="Validée"?"ok":x.status==="Refusée"?"no":""}">${esc(x.status)}</span></td><td>${x.status==="En attente"?`<button class="btn btn-primary btn-sm" onclick="decideRequest('${x.id}','Validée')">Valider</button> <button class="btn btn-danger btn-sm" onclick="decideRequest('${x.id}','Refusée')">Refuser</button>`:"—"}</td></tr>`).join("")||'<tr><td colspan="8" class="empty">Aucune demande enregistrée.</td></tr>'}</tbody></table></div></div>`}
-function decideRequest(id,status){const x=db.requests.find(a=>a.id===id);if(!x)return;if(!confirm(`${status} la demande de ${x.name} ?`))return;x.status=status;db.audit.unshift({action:`Demande ${status.toLowerCase()} : ${x.id}`,date:new Date().toISOString()});saveDB();renderRequests();const pc=document.getElementById("pending-count");if(pc){const n=db.requests.filter(a=>a.status==="En attente").length;pc.textContent=n?`(${n})`:""}}
+async function renderRequests(){
+  const content=document.getElementById("admin-content");
+  content.innerHTML=`<div class="app-title"><div><div class="kicker">Contrôle des inscriptions · Supabase</div><h1>Demandes des volontaires et ambassadeurs</h1><p>Les demandes affichées proviennent de la base centrale TOSALA.</p></div><button class="btn btn-outline" onclick="renderRequests()">Actualiser</button></div><div class="panel"><div class="empty">Chargement des demandes…</div></div>`;
+  try{
+    const requests=await fetchRegistrationRequests();
+    const pending=requests.filter(x=>x.statut==="pending").length;
+    const pc=document.getElementById("pending-count");if(pc)pc.textContent=pending?`(${pending})`:"";
+    content.innerHTML=`<div class="app-title"><div><div class="kicker">Contrôle des inscriptions · Supabase</div><h1>Demandes des volontaires et ambassadeurs</h1><p>${requests.length} demande(s) enregistrée(s), dont ${pending} en attente.</p></div><button class="btn btn-outline" onclick="renderRequests()">Actualiser</button></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Référence</th><th>Identité</th><th>Type</th><th>E-mail</th><th>Téléphone</th><th>Commune ID</th><th>Avenue</th><th>Date</th><th>Statut</th><th>Actions</th></tr></thead><tbody>${requests.map(x=>{const role=x.role_demande==="ambassador"?"Ambassadeur":"Volontaire";const status=requestStatusLabel(x.statut);const pill=x.statut==="approved"?"ok":x.statut==="rejected"?"no":"";return `<tr><td title="${esc(x.id)}">${esc(x.id.slice(0,8))}…</td><td><b>${esc(x.nom_complet)}</b></td><td>${role}</td><td>${esc(x.email||"Non renseigné")}</td><td>${esc(x.telephone||"Non renseigné")}</td><td>${esc(x.commune_id??"Non renseignée")}</td><td>${esc(x.avenue||"Non renseignée")}</td><td>${new Date(x.created_at).toLocaleDateString("fr-FR")}</td><td><span class="pill ${pill}">${esc(status)}</span></td><td>${x.statut==="pending"?`<button class="btn btn-primary btn-sm" onclick="decideSupabaseRequest('${x.id}','approved',this)">Approuver</button> <button class="btn btn-danger btn-sm" onclick="decideSupabaseRequest('${x.id}','rejected',this)">Refuser</button>`:"—"}</td></tr>`}).join("")||'<tr><td colspan="10" class="empty">Aucune demande enregistrée.</td></tr>'}</tbody></table></div></div>`;
+  }catch(error){
+    console.error("Lecture demandes TOSALA:",error);
+    content.innerHTML=`<div class="app-title"><div><div class="kicker">Contrôle des inscriptions</div><h1>Demandes des volontaires et ambassadeurs</h1></div><button class="btn btn-outline" onclick="renderRequests()">Réessayer</button></div><div class="panel"><div class="alert-box">Impossible de charger les demandes : ${esc(error.message||"Erreur inconnue")}. Vérifiez que ce compte possède bien le rôle administrateur approuvé et que la politique de lecture est active.</div></div>`;
+  }
+}
+async function renderAdminCommunications(){
+ const content=document.getElementById("admin-content");
+ content.innerHTML=`<div class="app-title"><div><div class="kicker">Communication institutionnelle</div><h1>Communications officielles</h1><p>Choisissez la commune et personnalisez chaque communication au nom de son bourgmestre.</p></div></div><div class="panel"><div class="empty">Chargement des 24 communes…</div></div>`;
+ try{
+  const communes=await loadPlanningCommunes();
+  window.tosalaCommunicationCommunes=communes;
+  content.innerHTML=`<div class="app-title"><div><div class="kicker">Communication institutionnelle</div><h1>Communications officielles</h1><p>Envoyez un message ciblé aux membres de TOSALA.</p></div></div>
+  <div class="panel"><h3>Nouvelle communication</h3><form id="tosala-communication-form" onsubmit="sendInstitutionalEmail(event)"><div class="form-grid">
+  <div class="field"><label>Destinataires</label><select name="audience" id="tosala-audience" onchange="toggleCommunicationCommune()"><option value="all">Tous les membres approuvés</option><option value="commune">Membres d'une commune précise</option><option value="volunteer">Tous les volontaires</option><option value="ambassador">Tous les ambassadeurs</option></select></div>
+  <div class="field"><label>Commune concernée et émettrice *</label><select name="commune_id" id="tosala-commune" required onchange="updateCommunicationPreview()"><option value="">Sélectionner la commune</option>${communes.map(c=>`<option value="${esc(c.id)}">${esc(c.nom)}</option>`).join("")}</select></div>
+  <div class="field full"><label>Nom du bourgmestre *</label><input name="bourgmestre_name" id="tosala-mayor" required maxlength="150" placeholder="Ex. Jean-Marie ..." oninput="updateCommunicationPreview()"><small class="form-note">Saisissez le nom du bourgmestre correspondant à la commune sélectionnée.</small></div>
+  <div class="field full"><label>Objet du message *</label><input name="subject" required maxlength="150" placeholder="Information officielle TOSALA"></div>
+  <div class="field full"><label>Message *</label><textarea name="message" rows="7" required maxlength="5000" placeholder="Rédigez votre communication officielle…"></textarea></div>
+  </div><div class="panel" style="padding:14px;margin-top:14px;background:#f7faf8"><b>Aperçu de la signature</b><p id="tosala-communication-preview" style="line-height:1.7;margin-bottom:0">Le Bourgmestre de la commune sélectionnée, Monsieur [NOM DU BOURGMESTRE].</p></div>
+  <div class="alert-box">L'envoi réel dépend de la configuration de la fonction Supabase Edge « tosala-send-email » et de son fournisseur e-mail. Aucun e-mail ne sera déclaré envoyé tant que le service n'aura pas confirmé l'opération.</div><button class="btn btn-primary" type="submit">Envoyer la communication</button><div id="email-send-feedback" class="form-note" style="margin-top:10px"></div></form></div>
+  <div class="panel" style="margin-top:15px"><h3>Règle pour les messages automatiques</h3><p>Les accusés de réception d'inscription, les confirmations d'approbation et les notifications de refus devront utiliser la commune du candidat et le nom de son bourgmestre.</p><p><b>Exemple :</b> « Le Bourgmestre de la commune de la Nsele, Monsieur [NOM DU BOURGMESTRE], vous souhaite la bienvenue au sein de Kinshasa Salongo Assainissement – TOSALA. »</p></div>`;
+  toggleCommunicationCommune();
+ }catch(error){content.innerHTML+=`<div class="alert-box">Impossible de charger les communes : ${esc(error.message||"Erreur inconnue")}</div>`;}
+}
+function toggleCommunicationCommune(){const audience=document.getElementById("tosala-audience"),commune=document.getElementById("tosala-commune");if(!audience||!commune)return;commune.disabled=false;commune.required=true;updateCommunicationPreview();}
+function updateCommunicationPreview(){const commune=document.getElementById("tosala-commune"),mayor=document.getElementById("tosala-mayor"),preview=document.getElementById("tosala-communication-preview");if(!preview)return;const name=commune?.selectedOptions?.[0]?.textContent||"[NOM DE LA COMMUNE]";const bourgmestre=mayor?.value.trim()||"[NOM DU BOURGMESTRE]";preview.textContent=`Le Bourgmestre de la commune de ${name}, Monsieur ${bourgmestre}.`}
+async function sendInstitutionalEmail(e){
+ e.preventDefault();const form=e.target,feedback=document.getElementById("email-send-feedback"),button=form.querySelector('button[type="submit"]');const f=new FormData(form);
+ const audience=String(f.get("audience")),communeId=f.get("commune_id"),bourgmestre=String(f.get("bourgmestre_name")||"").trim();
+ if(!bourgmestre){feedback.textContent="Veuillez renseigner le nom du bourgmestre.";return;}
+ if(!communeId){feedback.textContent="Veuillez sélectionner la commune concernée.";return;}
+ if(!confirm("Confirmer l'envoi de cette communication au nom du bourgmestre indiqué ?"))return;
+ button.disabled=true;button.textContent="Préparation de l'envoi…";feedback.textContent="Vérification du service d'envoi sécurisé…";
+ try{const selectedCommune=(window.tosalaCommunicationCommunes||[]).find(c=>String(c.id)===String(communeId));const {data,error}=await tosalaSupabase.functions.invoke("tosala-send-email",{body:{type:"announcement",audience,commune_id:Number(communeId),commune:selectedCommune?.nom||null,bourgmestre,nom:bourgmestre,subject:String(f.get("subject")),message:String(f.get("message")),sender_name:`Le Bourgmestre de la commune de ${selectedCommune?.nom||"Kinshasa"}, Monsieur ${bourgmestre}`,channel:"email"}});if(error)throw error;const sent=Number(data?.sent||0),failed=Number(data?.failed||0);feedback.textContent=sent+" e-mail(s) accepté(s) par le fournisseur"+(failed?" ; "+failed+" échec(s).":".");if(sent>0){form.reset();toggleCommunicationCommune();}}
+ catch(error){feedback.textContent="Envoi non effectué : le service e-mail est absent ou mal configuré. Aucun e-mail n'a été envoyé. Détail : "+(error.message||"erreur inconnue");}
+ finally{button.disabled=false;button.textContent="Envoyer la communication";}
+}
+
 function renderAdminReports(){
+ renderAdminMessages(); return;
  const items=db.reports;
  document.getElementById("admin-content").innerHTML=`<div class="app-title"><div><div class="kicker">Suivi citoyen</div><h1>Signalements reçus</h1><p>Photos, commentaires et localisation transmis par les volontaires et ambassadeurs.</p></div><span class="pill ok">${items.length} signalement(s)</span></div>
  <div class="report-inbox">${items.map(r=>`<article class="panel report-card"><div class="report-card-head"><div><h3>${esc(r.type)}</h3><p class="muted">${esc(r.author)} · ${r.role==="ambassador"?"Ambassadeur":"Volontaire"} · ${new Date(r.date).toLocaleString("fr-FR")}</p></div><span class="pill">${esc(r.status||"Reçu")}</span></div>
@@ -274,12 +427,45 @@ function renderAdminReports(){
  <div class="report-location"><b>${esc(r.commune||"Commune non précisée")}</b><span>Quartier : ${esc(r.quartier||"Non précisé")}</span><span>Avenue : ${esc(r.avenue||"Non précisée")}</span><span>Référence : ${esc(r.reference||"Non précisée")}</span></div>
  <p class="report-description">${esc(r.description||"Aucun commentaire")}</p><small class="muted">Téléphone : ${esc(r.phone||"Non communiqué")}</small></article>`).join("")||'<div class="panel empty">Aucun signalement reçu pour le moment.</div>'}</div>`;
 }
-function renderAdminCommunes(){document.getElementById("admin-content").innerHTML=`<div class="app-title"><div><div class="kicker">Référentiel administratif</div><h1>Les 24 communes de Kinshasa</h1><p>Répertoire de référence. Les données détaillées seront importées après validation officielle.</p></div></div><div class="quick-grid">${COMMUNES.map((c,i)=>`<div class="quick-card"><div class="kicker">COMMUNE ${String(i+1).padStart(2,"0")}</div><h3>${esc(c)}</h3><p>Référentiel géographique : à compléter avec les limites, quartiers et avenues validés.</p></div>`).join("")}</div>`}
-function renderAdminPlanning(){document.getElementById("admin-content").innerHTML=`<div class="app-title"><div><div class="kicker">Organisation des activités</div><h1>Planning du Salongo</h1><p>Créer un programme de Salongo pour une commune.</p></div></div><div class="panel"><form onsubmit="createPlanning(event)"><div class="form-grid"><div class="field"><label>Titre de l'activité</label><input name="title" required placeholder="Ex. Salongo communautaire"></div><div class="field"><label>Commune</label><select name="commune" required>${COMMUNES.map(c=>`<option>${c}</option>`).join("")}</select></div><div class="field"><label>Date</label><input name="date" type="date" required></div><div class="field"><label>Heure</label><input name="time" type="time" required></div><div class="field full"><label>Consignes et lieu de rassemblement</label><textarea name="details" rows="3" placeholder="Préciser le lieu, les objectifs et le matériel…"></textarea></div></div><button class="btn btn-primary" style="margin-top:14px">Enregistrer le planning</button></form></div><div class="panel" style="margin-top:15px"><h3>Activités enregistrées</h3>${db.plannings.map(p=>`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.commune)} · ${esc(p.date)} à ${esc(p.time)} · ${esc(p.details)}</small></div><span class="pill ok">Publié démo</span></div>`).join("")||'<div class="empty">Aucune activité programmée.</div>'}</div>`}
-function createPlanning(e){e.preventDefault();const f=new FormData(e.target);db.plannings.unshift({title:f.get("title"),commune:f.get("commune"),date:f.get("date"),time:f.get("time"),details:f.get("details")});saveDB();renderAdminPlanning()}
-function renderAdminSettings(){document.getElementById("admin-content").innerHTML=`<div class="app-title"><div><div class="kicker">Configuration</div><h1>Paramètres de démonstration</h1><p>Gestion des données locales de ce navigateur.</p></div></div><div class="panel"><h3>Compte administrateur de test</h3><p>Identifiant : <b>admin</b><br>Mot de passe : <b>Tosala@2026!</b></p><div class="alert-box">Ces identifiants sont visibles dans le code HTML/JavaScript. Ils servent uniquement au test local et ne constituent pas une authentification sécurisée.</div><h3>Journal d'activité</h3>${db.audit.slice(0,20).map(a=>`<div class="list-item"><strong>${esc(a.action)}</strong><small>${new Date(a.date).toLocaleString("fr-FR")}</small></div>`).join("")||'<div class="empty">Aucune opération enregistrée.</div>'}<button class="btn btn-outline" onclick="exportData()">Exporter les données JSON</button></div>`}
-function memberView(view,el){document.querySelectorAll(".sidebar .side-link").forEach(x=>x.classList.remove("active"));if(el)el.classList.add("active");if(view==="home")renderMemberHome();if(view==="map")renderMemberMap();if(view==="planning")renderMemberPlanning();if(view==="reports")renderMemberReports();if(view==="profile")renderMemberProfile()}
-function renderMemberHome(){const isAmb=currentUser.role==="ambassador";document.getElementById("member-content").innerHTML=`<div class="app-title"><div><div class="kicker">${isAmb?"Ambassadeur TOSALA":"Volontaire TOSALA"}</div><h1>Bienvenue, ${esc(currentUser.name.split(" ")[0])}</h1><p>Votre espace personnel · ${esc(currentUser.commune)}</p></div></div><div class="metric-grid"><div class="metric"><span>Mes signalements</span><strong>${db.reports.filter(r=>r.phone===currentUser.phone).length}</strong></div><div class="metric"><span>Activités programmées</span><strong>${db.plannings.filter(p=>p.commune===currentUser.commune).length}</strong></div><div class="metric"><span>Mon statut</span><strong style="font-size:17px">Actif</strong></div><div class="metric"><span>Ma commune</span><strong style="font-size:17px">${esc(currentUser.commune)}</strong></div></div><div class="dash-grid"><section class="panel"><h3>${isAmb?"Signaler un problème":"Participer au Salongo"}</h3><p>${isAmb?"Vous pouvez transmettre un problème d’assainissement pour qu’il soit examiné par l’administration.":"Consultez les activités de Salongo publiées dans votre commune et participez aux actions communautaires."}</p><button class="btn btn-primary" onclick="openReportForm()">＋ Envoyer un signalement avec photo</button> <button class="btn btn-outline" onclick="memberView('planning')">Voir le planning</button></section><section class="panel"><h3>Informations utiles</h3><p>Commune de résidence : <b>${esc(currentUser.commune)}</b><br>Type de compte : <b>${isAmb?"Ambassadeur TOSALA":"Volontaire"}</b></p><p>Les fonctions connectées au serveur central seront activées lors de la mise en production.</p></section></div>`}
+async function renderAdminCommunes(){
+ const el=document.getElementById("admin-content");
+ el.innerHTML=`<div class="app-title"><div><div class="kicker">Référentiel administratif</div><h1>Gestion des 24 communes</h1><p>Renseignez et modifiez les noms des Bourgmestres depuis cet espace administrateur.</p></div></div><div class="panel"><div class="empty">Chargement des communes et des responsables…</div></div>`;
+ try{
+  const communes=await loadPlanningCommunes();
+  const {data:officials,error}=await tosalaSupabase.from("commune_officials").select("commune_id,bourgmestre_name,updated_at");
+  if(error)throw error;
+  const byCommune=new Map((officials||[]).map(x=>[String(x.commune_id),x]));
+  el.innerHTML=`<div class="app-title"><div><div class="kicker">Référentiel administratif</div><h1>Gestion des 24 communes</h1><p>Ajoutez ou modifiez le nom du Bourgmestre de chaque commune. Ces informations seront conservées dans la base centrale.</p></div></div><div class="panel"><div class="table-wrap"><table><thead><tr><th>Commune</th><th>Nom du Bourgmestre</th><th>État</th><th>Action</th></tr></thead><tbody>${communes.map(c=>{const o=byCommune.get(String(c.id));return `<tr><td><strong>${esc(c.nom)}</strong></td><td><input id="mayor-${esc(c.id)}" maxlength="160" value="${esc(o?.bourgmestre_name||"")}" placeholder="Nom complet du Bourgmestre" style="min-width:210px;width:100%;padding:10px;border:1px solid var(--line);border-radius:8px"></td><td>${o?'<span class="pill ok">Enregistré</span>':'<span class="pill">À renseigner</span>'}</td><td><button class="btn btn-primary btn-sm" onclick="saveCommuneOfficial('${esc(c.id)}','${esc(c.nom)}',this)">Enregistrer</button></td></tr>`}).join("")}</tbody></table></div><div id="mayor-feedback" class="muted" style="margin-top:12px">Les noms peuvent être corrigés à tout moment par un administrateur.</div></div>`;
+ }catch(e){
+  el.innerHTML+=`<div class="alert-box">Impossible de charger la gestion des Bourgmestres : ${esc(e.message||"Erreur inconnue")}. Vérifiez que le script SQL de configuration V17 a été exécuté dans Supabase.</div>`;
+ }
+}
+async function saveCommuneOfficial(communeId,communeName,button){
+ const input=document.getElementById("mayor-"+communeId);
+ const name=(input?.value||"").trim();
+ const feedback=document.getElementById("mayor-feedback");
+ if(!name){if(feedback)feedback.textContent="Veuillez saisir le nom du Bourgmestre de "+communeName+".";return;}
+ if(button){button.disabled=true;button.textContent="Enregistrement…";}
+ try{
+  const {error}=await tosalaSupabase.from("commune_officials").upsert(
+   {commune_id:Number(communeId),bourgmestre_name:name,updated_by:(await tosalaSupabase.auth.getUser()).data.user?.id},
+   {onConflict:"commune_id"}
+  );
+  if(error)throw error;
+  if(feedback)feedback.textContent="Nom du Bourgmestre de "+communeName+" enregistré avec succès.";
+  if(button){button.textContent="Enregistré";button.classList.remove("btn-primary");button.classList.add("btn-outline");}
+ }catch(e){
+  if(feedback)feedback.textContent="Échec de l'enregistrement : "+(e.message||"erreur inconnue");
+  if(button){button.disabled=false;button.textContent="Réessayer";}
+ }
+}
+async function loadPlanningCommunes(){const {data,error}=await tosalaSupabase.from("communes").select("id,nom").order("nom");if(error)throw error;return (data||[]).filter(c=>c.id!==null&&c.nom);}
+async function renderAdminPlanning(){const el=document.getElementById("admin-content");el.innerHTML=`<div class="app-title"><div><div class="kicker">Organisation des activités</div><h1>Planning du Salongo</h1><p>Publication ciblée : seuls les membres approuvés de la commune choisie verront le programme.</p></div></div><div class="panel"><div class="empty">Chargement du référentiel des communes…</div></div>`;try{const communes=await loadPlanningCommunes();const {data:items,error}=await tosalaSupabase.from("salongo_plannings").select("*").order("date_salongo",{ascending:false});if(error)throw error;window.tosalaPlanningCommunes=communes;el.innerHTML=`<div class="app-title"><div><div class="kicker">Organisation des activités</div><h1>Planning du Salongo</h1><p>Créez autant de programmes que nécessaire. Chaque programme est visible uniquement dans sa commune.</p></div></div><div class="panel"><form id="salongo-planning-form" onsubmit="createSupabasePlanning(event)"><div class="form-grid"><div class="field"><label>Titre de l'activité *</label><input name="title" required maxlength="150" placeholder="Ex. Salongo communautaire"></div><div class="field"><label>Commune *</label><select name="commune_id" required><option value="">Choisir une commune</option>${communes.map(c=>`<option value="${esc(c.id)}">${esc(c.nom)}</option>`).join("")}</select></div><div class="field"><label>Date *</label><input name="date" type="date" required></div><div class="field"><label>Heure *</label><input name="time" type="time" required></div><div class="field full"><label>Lieu précis / point de rassemblement *</label><input name="place" required placeholder="Avenue, quartier, point de repère"></div><div class="field full"><label>Consignes et matériel</label><textarea name="details" rows="3" placeholder="Objectifs, matériel à apporter et consignes…"></textarea></div><div class="field full"><label>Photo de référence du lieu</label><input name="photo" type="file" accept="image/*"><small class="muted">Formats image uniquement. Photo facultative.</small></div></div><button class="btn btn-primary" style="margin-top:14px" type="submit">＋ Publier le planning</button><div id="planning-feedback"></div></form></div><div class="panel" style="margin-top:15px"><h3>Programmes publiés (${(items||[]).length})</h3>${(items||[]).map(p=>{const cn=communes.find(c=>String(c.id)===String(p.commune_id))?.nom||`Commune #${p.commune_id}`;return `<div class="list-item" style="align-items:flex-start"><div style="flex:1"><strong>${esc(p.titre)}</strong><small>${esc(cn)} · ${esc(p.date_salongo)} à ${esc(String(p.heure_salongo||"").slice(0,5))}<br>Lieu : ${esc(p.lieu)}<br>${esc(p.consignes||"")}</small>${p.photo_path?`<a href="${tosalaSupabase.storage.from("tosala-salongo").getPublicUrl(p.photo_path).data.publicUrl}" target="_blank" rel="noopener"><img src="${tosalaSupabase.storage.from("tosala-salongo").getPublicUrl(p.photo_path).data.publicUrl}" alt="Lieu du Salongo" style="display:block;max-width:220px;max-height:140px;object-fit:cover;border-radius:10px;margin-top:9px"></a>`:""}<span class="pill ok">Publié</span></div><button class="btn btn-danger btn-sm" onclick="deleteSupabasePlanning('${p.id}','${esc(p.photo_path||"")}')">Supprimer</button></div>`}).join("")||'<div class="empty">Aucun planning publié.</div>'}</div>`;}catch(e){el.innerHTML+=`<div class="alert-box">Impossible de charger les plannings : ${esc(e.message||"Erreur inconnue")}. Vérifiez que la table « communes » contient les 24 communes.</div>`;}}
+async function createSupabasePlanning(e){e.preventDefault();const form=e.currentTarget;const f=new FormData(form);const btn=form.querySelector('button[type="submit"]');const feedback=document.getElementById("planning-feedback");btn.disabled=true;btn.textContent="Publication…";let photoPath=null;try{const communeId=Number(f.get("commune_id"));if(!Number.isFinite(communeId))throw new Error("Choisissez une commune valide.");const file=f.get("photo");if(file&&file.size){if(!file.type.startsWith("image/"))throw new Error("Le fichier doit être une image.");if(file.size>8*1024*1024)throw new Error("La photo ne doit pas dépasser 8 Mo.");const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"");photoPath=`${currentUser.id}/${crypto.randomUUID()}.${ext}`;const {error:upErr}=await tosalaSupabase.storage.from("tosala-salongo").upload(photoPath,file,{upsert:false,contentType:file.type});if(upErr)throw upErr;}const {error}=await tosalaSupabase.from("salongo_plannings").insert({titre:String(f.get("title")).trim(),commune_id:communeId,date_salongo:f.get("date"),heure_salongo:f.get("time"),lieu:String(f.get("place")).trim(),consignes:String(f.get("details")||"").trim(),photo_path:photoPath,created_by:currentUser.id,statut:"published"});if(error)throw error;alert("Planning publié. Il est maintenant visible aux membres approuvés de la commune choisie.");await renderAdminPlanning();}catch(err){if(photoPath)await tosalaSupabase.storage.from("tosala-salongo").remove([photoPath]);feedback.innerHTML=`<p class="form-note" style="color:#bd3333">${esc(err.message||"Publication impossible")}</p>`;btn.disabled=false;btn.textContent="＋ Publier le planning";}}
+async function deleteSupabasePlanning(id,path){if(!confirm("Supprimer définitivement ce planning ?"))return;try{if(path){const {error:photoError}=await tosalaSupabase.storage.from("tosala-salongo").remove([path]);if(photoError)throw photoError;}const {error}=await tosalaSupabase.from("salongo_plannings").delete().eq("id",id);if(error)throw error;alert("Planning supprimé.");await renderAdminPlanning();}catch(e){alert("Suppression impossible : "+(e.message||"vérifiez les autorisations."));}}
+function renderAdminSettings(){document.getElementById("admin-content").innerHTML=`<div class="app-title"><div><div class="kicker">Configuration</div><h1>Paramètres de démonstration</h1><p>Gestion des données locales de ce navigateur.</p></div></div><div class="panel"><h3>Authentification</h3><p>Les comptes administrateurs sont gérés par Supabase Auth et les profils approuvés de la base centrale.</p><div class="success-box">Aucun mot de passe administrateur n’est stocké dans le fichier HTML.</div><h3>Journal d'activité</h3>${db.audit.slice(0,20).map(a=>`<div class="list-item"><strong>${esc(a.action)}</strong><small>${new Date(a.date).toLocaleString("fr-FR")}</small></div>`).join("")||'<div class="empty">Aucune opération enregistrée.</div>'}<button class="btn btn-outline" onclick="exportData()">Exporter les données JSON</button></div>`}
+function memberView(view,el){document.querySelectorAll(".sidebar .side-link").forEach(x=>x.classList.remove("active"));if(el)el.classList.add("active");if(view==="home")renderMemberHome();if(view==="map")renderMemberMap();if(view==="planning")renderMemberPlanning();if(view==="reports")renderMemberReports();if(view==="messages")renderMemberMessages();if(view==="profile")renderMemberProfile()}
+function renderMemberHome(){const isAmb=currentUser.role==="ambassador";document.getElementById("member-content").innerHTML=`<div class="app-title"><div><div class="kicker">${isAmb?"Ambassadeur TOSALA":"Volontaire TOSALA"}</div><h1>Bienvenue, ${esc(currentUser.name.split(" ")[0])}</h1><p>Votre espace personnel · ${esc(currentUser.commune)}</p></div></div><div class="metric-grid"><div class="metric"><span>Mes signalements</span><strong>${db.reports.filter(r=>r.phone===currentUser.phone).length}</strong></div><div class="metric"><span>Activités programmées</span><strong>${db.plannings.filter(p=>p.commune===currentUser.commune).length}</strong></div><div class="metric"><span>Mon statut</span><strong style="font-size:17px">Actif</strong></div><div class="metric"><span>Ma commune</span><strong style="font-size:17px">${esc(currentUser.commune)}</strong></div></div><div class="dash-grid"><section class="panel"><h3>${isAmb?"Signaler un problème":"Participer au Salongo"}</h3><p>${isAmb?"Vous pouvez transmettre un problème d’assainissement pour qu’il soit examiné par l’administration.":"Consultez les activités de Salongo publiées dans votre commune et participez aux actions communautaires."}</p><button class="btn btn-primary" onclick="openReportForm()">＋ Envoyer un signalement avec photo</button> <button class="btn btn-outline" onclick="memberView('planning')">Voir le planning</button></section><section class="panel"><h3>Informations utiles</h3><p>Commune de résidence : <b>${esc(currentUser.commune)}</b><br>Type de compte : <b>${isAmb?"Ambassadeur TOSALA":"Volontaire"}</b></p><p>Vous pouvez envoyer des messages et des signalements avec photo à l’administration centrale TOSALA.</p></section></div>`}
 function openReportForm(){
  const existing=document.getElementById("report-form-panel");if(existing)existing.remove();
  document.getElementById("member-content").insertAdjacentHTML("afterbegin",`<div class="panel" id="report-form-panel" style="margin-bottom:15px">
@@ -306,11 +492,39 @@ async function submitReport(e){
  e.preventDefault();const f=new FormData(e.target),file=f.get("photo"),button=document.getElementById("report-submit-btn");
  if(!file||!file.size){alert("Veuillez prendre ou joindre une photo du problème.");return;}
  button.disabled=true;button.textContent="Envoi en cours…";
- try{const photo=await compressReportPhoto(file);db.reports.unshift({id:"SIG-"+Date.now(),author:currentUser.name,role:currentUser.role,phone:currentUser.phone,commune:f.get("commune"),quartier:f.get("quartier"),avenue:f.get("avenue"),reference:f.get("reference"),type:f.get("type"),description:f.get("description"),photo,date:new Date().toISOString(),status:"Reçu"});saveDB();renderMemberReports();alert("Votre signalement avec photo a été transmis à la boîte de réception de l'administrateur.");}
- catch(err){button.disabled=false;button.textContent="Envoyer à l'administrateur";alert("Impossible de traiter cette photo. Essayez une image moins volumineuse.");}
+ try{
+   if(!tosalaSupabase||!currentUser?.id)throw new Error("Session Supabase absente. Reconnectez-vous.");
+   const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+   const path=`${currentUser.id}/${crypto.randomUUID()}.${ext}`;
+   const {error:uploadError}=await tosalaSupabase.storage.from("tosala-messages").upload(path,file,{contentType:file.type||"image/jpeg",upsert:false});
+   if(uploadError)throw uploadError;
+   const {error:insertError}=await tosalaSupabase.from("citizen_messages").insert({user_id:currentUser.id,category:"signalement",subject:String(f.get("type")),message:String(f.get("description")),commune:String(f.get("commune")),quartier:String(f.get("quartier")||""),avenue:String(f.get("avenue")||""),reference_lieu:String(f.get("reference")||""),photo_path:path});
+   if(insertError){await tosalaSupabase.storage.from("tosala-messages").remove([path]);throw insertError;}
+   alert("Votre signalement et sa photo ont été transmis à l'administration TOSALA.");renderMemberMessages();
+ }catch(err){console.error(err);button.disabled=false;button.textContent="Envoyer à l'administrateur";alert("Envoi impossible : "+(err.message||"vérifiez la configuration SQL et du stockage TOSALA."));}
 }
+function citizenRoleLabel(role){const r=String(role||"").toLowerCase();if(["volunteer","volontaire"].includes(r))return "Volontaire";if(["ambassador","ambassadeur"].includes(r))return "Ambassadeur";if(r==="admin")return "Administrateur";return "Membre TOSALA";}
+function citizenPhotoExpiry(createdAt){return new Date(new Date(createdAt).getTime()+72*60*60*1000);}
+function citizenPhotoTimeLabel(createdAt){const expiry=citizenPhotoExpiry(createdAt);if(Date.now()>=expiry.getTime())return "Photo arrivée à échéance (72 h)";return "Photo conservée jusqu’au "+expiry.toLocaleString("fr-FR");}
+async function renderAdminMessages(){
+ const el=document.getElementById("admin-content");el.innerHTML=`<div class="app-title"><div><div class="kicker">Communication citoyenne</div><h1>Boîte de réception TOSALA</h1><p>Messages et signalements envoyés par les volontaires et ambassadeurs, avec leurs photos.</p></div><button class="btn btn-outline" onclick="renderAdminMessages()">Actualiser</button></div><div class="panel"><div class="empty">Chargement des messages…</div></div>`;
+ try{
+  const {data,error}=await tosalaSupabase.from("citizen_messages").select("*").order("created_at",{ascending:false});if(error)throw error;
+  const rows=await Promise.all((data||[]).map(async m=>{let photo="";if(m.photo_path){const r=await tosalaSupabase.storage.from("tosala-messages").createSignedUrl(m.photo_path,3600);if(!r.error)photo=r.data.signedUrl;}return {...m,photo};}));
+  el.innerHTML=`<div class="app-title"><div><div class="kicker">Communication citoyenne</div><h1>Boîte de réception TOSALA</h1><p>${rows.length} message(s) reçu(s). Les photos sont conservées pendant 72 heures après réception. Les métadonnées du message restent consultables.</p></div><button class="btn btn-outline" onclick="renderAdminMessages()">Actualiser</button></div><div class="report-inbox">${rows.map(m=>`<article class="panel report-card"><div class="report-card-head"><div><h3>${esc(m.subject||"Message sans objet")}</h3><p class="muted">${esc(m.sender_name||"Membre TOSALA")} · ${citizenRoleLabel(m.sender_role)} · ${new Date(m.created_at).toLocaleString("fr-FR")}</p><small>${esc(m.sender_email||"")} · ${esc(m.sender_phone||"")}</small></div><span class="pill">${esc(m.status||"reçu")}</span></div>${m.photo?`<a href="${m.photo}" target="_blank" rel="noopener"><img class="report-photo" src="${m.photo}" alt="Photo jointe"></a>`:(m.photo_path?'<p class="form-note">Photo non disponible ou arrivée à échéance.</p>':'')}<p class="report-description">${esc(m.message)}</p><div class="report-location"><b>${esc(m.commune||"Commune non précisée")}</b><span>Quartier : ${esc(m.quartier||"—")}</span><span>Avenue : ${esc(m.avenue||"—")}</span><span>Référence : ${esc(m.reference_lieu||"—")}</span></div><p class="form-note">${m.photo_path?citizenPhotoTimeLabel(m.created_at):(m.photo_deleted_at?"Photo automatiquement supprimée après 72 heures.":"Aucune photo jointe.")}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn btn-soft btn-sm" onclick="markCitizenMessageRead('${m.id}')">Marquer comme traité</button><button class="btn btn-outline btn-sm" onclick="downloadCitizenMessagePdf('${m.id}')">Télécharger le dossier PDF A4</button><button class="btn btn-danger btn-sm" onclick="deleteCitizenMessage('${m.id}')">Supprimer le message</button></div></article>`).join("")||'<div class="panel empty">Aucun message reçu pour le moment.</div>'}</div>`;
+ }catch(e){el.innerHTML+=`<div class="alert-box">Impossible de charger la boîte de réception : ${esc(e.message||"Erreur inconnue")}. Exécutez d'abord le SQL de configuration fourni avec cette version.</div>`;}
+}
+async function deleteCitizenMessage(id){if(!confirm("Supprimer définitivement ce message et sa photo associée ? Cette action est irréversible."))return;try{const {data,error:readError}=await tosalaSupabase.from("citizen_messages").select("photo_path").eq("id",id).single();if(readError)throw readError;if(data?.photo_path){const {error:storageError}=await tosalaSupabase.storage.from("tosala-messages").remove([data.photo_path]);if(storageError)throw storageError;}const {error}=await tosalaSupabase.from("citizen_messages").delete().eq("id",id);if(error)throw error;alert("Message supprimé.");renderAdminMessages();}catch(e){alert("Suppression impossible : "+(e.message||"vérifiez les autorisations SQL."));}}
+async function downloadCitizenMessagePdf(id){try{if(!window.jspdf?.jsPDF)throw new Error("Le module PDF n’est pas chargé. Vérifiez la connexion Internet puis réessayez.");const {data:m,error}=await tosalaSupabase.from("citizen_messages").select("*").eq("id",id).single();if(error)throw error;const {jsPDF}=window.jspdf;const pdf=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});const left=16;let y=18;pdf.setFont("helvetica","bold");pdf.setFontSize(17);pdf.text("TOSALA — DOSSIER DE SIGNALEMENT",left,y);y+=10;pdf.setFontSize(10);pdf.setFont("helvetica","normal");const lines=[`Référence : ${m.id}`,`Objet : ${m.subject||"Message sans objet"}`,`Expéditeur : ${m.sender_name||"Non renseigné"}`,`Profil : ${citizenRoleLabel(m.sender_role)}`,`E-mail : ${m.sender_email||"Non renseigné"}`,`Téléphone : ${m.sender_phone||"Non renseigné"}`,`Date : ${new Date(m.created_at).toLocaleString("fr-FR")}`,`Statut : ${m.status||"reçu"}`,`Commune : ${m.commune||"Non précisée"}`,`Quartier : ${m.quartier||"Non précisé"}`,`Avenue : ${m.avenue||"Non précisée"}`,`Repère : ${m.reference_lieu||"Non précisé"}`];for(const line of lines){const wrapped=pdf.splitTextToSize(line,178);pdf.text(wrapped,left,y);y+=wrapped.length*5+1;}y+=3;pdf.setFont("helvetica","bold");pdf.text("Description",left,y);y+=6;pdf.setFont("helvetica","normal");const desc=pdf.splitTextToSize(m.message||"—",178);pdf.text(desc,left,y);y+=desc.length*5+5;if(m.photo_path&&Date.now()<citizenPhotoExpiry(m.created_at).getTime()){const signed=await tosalaSupabase.storage.from("tosala-messages").createSignedUrl(m.photo_path,300);if(!signed.error){const response=await fetch(signed.data.signedUrl);const blob=await response.blob();const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob);});if(y>205){pdf.addPage();y=18;}pdf.setFont("helvetica","bold");pdf.text("Photo jointe",left,y);y+=5;const format=blob.type.includes("png")?"PNG":"JPEG";const props=pdf.getImageProperties(dataUrl);const w=178;const h=Math.min(95,w*props.height/props.width);pdf.addImage(dataUrl,format,left,y,w,h);}}pdf.setFontSize(8);pdf.setTextColor(100);pdf.text("Document généré par la plateforme TOSALA — Kinshasa Salongo Assainissement",left,287);pdf.save(`TOSALA_signalement_${String(id).slice(0,8)}.pdf`);}catch(e){alert("Création du PDF impossible : "+(e.message||"erreur inconnue"));}}
+async function markCitizenMessageRead(id){const {error}=await tosalaSupabase.from("citizen_messages").update({status:"traité"}).eq("id",id);if(error){alert("Mise à jour impossible : "+error.message);return;}renderAdminMessages();}
+function openMemberMessageForm(){const host=document.getElementById("member-content");const old=document.getElementById("member-message-form");if(old)old.remove();host.insertAdjacentHTML("afterbegin",`<section class="panel" id="member-message-form"><h2>Écrire à l’administration</h2><p>Votre message sera transmis à la boîte de réception centrale TOSALA. Vous pouvez joindre une photo.</p><form onsubmit="submitMemberMessage(event)"><div class="form-grid"><div class="field full"><label>Objet</label><input name="subject" required maxlength="160" placeholder="Ex. Problème d'assainissement / demande d'information"></div><div class="field full"><label>Votre message</label><textarea name="message" rows="6" required maxlength="5000" placeholder="Décrivez clairement votre demande…"></textarea></div><div class="field full"><label>Photo (facultative)</label><input type="file" name="photo" accept="image/*" capture="environment"></div><div class="field"><label>Commune</label><input name="commune" value="${esc(currentUser.commune||"")}" maxlength="100"></div></div><button class="btn btn-primary" type="submit">Envoyer à l’administration</button> <button class="btn btn-outline" type="button" onclick="document.getElementById('member-message-form').remove()">Annuler</button></form></section>`);}
+async function submitMemberMessage(e){e.preventDefault();const form=e.target,f=new FormData(form),btn=form.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent="Envoi…";let path=null;try{const file=f.get("photo");if(file&&file.size){if(!file.type.startsWith("image/"))throw new Error("Le fichier joint doit être une image.");if(file.size>8*1024*1024)throw new Error("La photo dépasse 8 Mo. Choisissez une image plus légère.");const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";path=`${currentUser.id}/${crypto.randomUUID()}.${ext}`;const up=await tosalaSupabase.storage.from("tosala-messages").upload(path,file,{contentType:file.type,upsert:false});if(up.error)throw up.error;}
+ const {error}=await tosalaSupabase.from("citizen_messages").insert({user_id:currentUser.id,category:"message",subject:String(f.get("subject")),message:String(f.get("message")),commune:String(f.get("commune")||""),photo_path:path});if(error)throw error;alert("Votre message a été transmis à l'administration TOSALA.");renderMemberMessages();
+ }catch(err){if(path)await tosalaSupabase.storage.from("tosala-messages").remove([path]);alert("Envoi impossible : "+(err.message||"erreur inconnue"));btn.disabled=false;btn.textContent="Envoyer à l’administration";}}
+async function renderMemberMessages(){const el=document.getElementById("member-content");el.innerHTML=`<div class="app-title"><div><div class="kicker">Espace citoyen</div><h1>Mes messages</h1><p>Écrivez à l’administration et consultez l’historique de vos transmissions.</p></div><button class="btn btn-primary" onclick="openMemberMessageForm()">＋ Nouveau message</button></div><div class="panel"><div class="empty">Chargement de vos messages…</div></div>`;try{const {data,error}=await tosalaSupabase.from("citizen_messages").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});if(error)throw error;el.innerHTML=`<div class="app-title"><div><div class="kicker">Espace citoyen</div><h1>Mes messages</h1><p>Vos messages et signalements transmis à l’administration.</p></div><button class="btn btn-primary" onclick="openMemberMessageForm()">＋ Nouveau message</button></div><div class="report-inbox">${(data||[]).map(m=>`<article class="panel report-card"><div class="report-card-head"><h3>${esc(m.subject)}</h3><span class="pill">${esc(m.status||"reçu")}</span></div><p>${esc(m.message)}</p><small class="muted">${new Date(m.created_at).toLocaleString("fr-FR")}</small></article>`).join("")||'<div class="panel empty">Vous n’avez encore envoyé aucun message.</div>'}</div>`;}catch(e){el.innerHTML+=`<div class="alert-box">La messagerie n'est pas encore configurée : ${esc(e.message||"exécutez le SQL de configuration")}</div>`;}}
+
 function renderMemberMap(){document.getElementById("member-content").innerHTML=`<div class="app-title"><div><div class="kicker">Géographie</div><h1>Carte de Kinshasa</h1><p>Explorez la carte et sélectionnez votre commune.</p></div></div><div class="panel"><div id="member-map" style="height:460px;border-radius:12px"></div><p>Les coordonnées exactes et limites communales officielles seront ajoutées à partir du référentiel géographique validé.</p></div>`;setTimeout(()=>createLeafletMap("member-map"),100)}
-function renderMemberPlanning(){const list=db.plannings.filter(p=>p.commune===currentUser.commune);document.getElementById("member-content").innerHTML=`<div class="app-title"><div><div class="kicker">Calendrier communautaire</div><h1>Planning du Salongo</h1><p>Activités publiées pour ${esc(currentUser.commune)}.</p></div></div><div class="panel">${list.map(p=>`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.date)} · ${esc(p.time)} · ${esc(p.details)}</small></div><span class="pill ok">Programmé</span></div>`).join("")||'<div class="empty">Aucun planning publié pour votre commune pour le moment.</div>'}</div>`}
+async function renderMemberPlanning(){const el=document.getElementById("member-content");el.innerHTML=`<div class="app-title"><div><div class="kicker">Calendrier communautaire</div><h1>Planning du Salongo</h1><p>Programmes de votre commune : ${esc(currentUser.commune)}.</p></div></div><div class="panel"><div class="empty">Chargement des programmes…</div></div>`;try{if(!currentUser.communeId)throw new Error("Votre profil ne contient pas encore de commune attribuée. Contactez l'administration pour corriger votre profil.");const {data:items,error}=await tosalaSupabase.from("salongo_plannings").select("id,titre,commune_id,date_salongo,heure_salongo,lieu,consignes,photo_path,statut,created_at").eq("commune_id",currentUser.communeId).eq("statut","published").order("date_salongo",{ascending:true});if(error)throw error;el.innerHTML=`<div class="app-title"><div><div class="kicker">Calendrier communautaire</div><h1>Planning du Salongo</h1><p>Programmes publiés pour ${esc(currentUser.commune)} uniquement.</p></div><button class="btn btn-outline" onclick="renderMemberPlanning()">Actualiser</button></div><div class="report-inbox">${(items||[]).map(p=>{const photo=p.photo_path?tosalaSupabase.storage.from("tosala-salongo").getPublicUrl(p.photo_path).data.publicUrl:"";return `<article class="panel report-card"><div class="report-card-head"><h3>${esc(p.titre)}</h3><span class="pill ok">Programmé</span></div><p><b>Date :</b> ${new Date(p.date_salongo+"T00:00:00").toLocaleDateString("fr-FR")} · <b>Heure :</b> ${esc(String(p.heure_salongo||"").slice(0,5))}</p><p><b>Lieu de rassemblement :</b> ${esc(p.lieu)}</p><p>${esc(p.consignes||"")}</p>${photo?`<a href="${photo}" target="_blank" rel="noopener"><img src="${photo}" alt="Photo de référence du lieu du Salongo" style="width:100%;max-width:480px;max-height:260px;object-fit:cover;border-radius:12px"></a>`:""}</article>`}).join("")||'<div class="panel empty">Aucun planning publié pour votre commune pour le moment.</div>'}</div>`;}catch(e){el.innerHTML+=`<div class="alert-box">${esc(e.message||"Chargement impossible")}</div>`;}}
 function renderMemberReports(){
  const list=db.reports.filter(r=>r.phone===currentUser.phone);
  document.getElementById("member-content").innerHTML=`<div class="app-title"><div><div class="kicker">Historique personnel</div><h1>Mes signalements</h1><p>Consultez les photos, lieux et commentaires que vous avez envoyés.</p></div><button class="btn btn-primary" onclick="openReportForm()">＋ Nouveau signalement</button></div>
