@@ -110,6 +110,14 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 .partner-lightbox-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border:1px solid #ffffff80;border-radius:50%;background:#ffffff18;color:#fff;font-size:30px;line-height:1;cursor:pointer}
 @media(max-width:600px){.partner-lightbox{padding:14px}.partner-lightbox>img{max-width:96vw;max-height:84vh;padding:5px}.partner-lightbox-close{top:10px;right:10px}}
 
+
+/* Boutons d'action placés clairement sous le titre du visuel héro */
+.hero .hero-actions{position:relative;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+@media(max-width:600px){
+  .hero .hero-actions{margin-top:18px;justify-content:flex-start}
+  .hero .hero-actions .btn{min-height:44px}
+}
+
 </style>
 </head>
 <body>
@@ -335,7 +343,8 @@ async function login(e){
   const feedback=document.getElementById("login-feedback");
   const email=document.getElementById("login-id").value.trim().toLowerCase();
   const pw=document.getElementById("login-password").value;
-  if(!tosalaSupabase){feedback.innerHTML='<p class="form-note" style="color:#bd3333">Connexion Supabase indisponible. Vérifiez le statut affiché en bas de l’écran.</p>';return;}
+  if(!tosalaSupabase){feedback.innerHTML='<p class="form-note" style="color:#bd3333">Le service de connexion est momentanément indisponible. Vérifiez votre connexion Internet puis réessayez.</p>';return;}
+  if(!email||!pw){feedback.innerHTML='<p class="form-note" style="color:#bd3333">Veuillez saisir votre adresse e-mail et votre mot de passe pour continuer.</p>';return;}
   const button=e.target.querySelector('button[type="submit"]');
   button.disabled=true;button.textContent="Connexion…";
   try{
@@ -373,7 +382,23 @@ async function login(e){
     if(["admin","super_admin"].includes(currentUser.role))startAdminPresenceMonitor();
   }catch(error){
     console.error("Connexion Kinshasa moto na moto abongisa:",error);
-    feedback.innerHTML='<p class="form-note" style="color:#bd3333">'+esc(error.message||"Connexion impossible.")+'</p>';
+    const authCode=String(error.code||error.name||"").toLowerCase();
+    const authMessage=String(error.message||"").toLowerCase();
+    let message="La connexion n’a pas pu aboutir. Veuillez réessayer dans quelques instants.";
+    if(authCode==="invalid_credentials"||authMessage.includes("invalid login credentials")||authMessage.includes("invalid_credentials")){
+      message="Adresse e-mail ou mot de passe incorrect. Vérifiez l’adresse saisie et votre mot de passe, puis réessayez.";
+    }else if(authCode==="email_not_confirmed"||authMessage.includes("email not confirmed")){
+      message="Votre adresse e-mail n’a pas encore été confirmée. Consultez votre boîte de réception et confirmez votre adresse avant de vous connecter.";
+    }else if(authCode==="user_not_found"||authMessage.includes("user not found")){
+      message="Aucun compte ne correspond à cette adresse e-mail. Vérifiez l’orthographe ou inscrivez-vous si vous ne possédez pas encore de compte.";
+    }else if(authCode==="too_many_requests"||authMessage.includes("rate limit")||authMessage.includes("too many requests")){
+      message="Trop de tentatives de connexion ont été effectuées. Patientez quelques minutes avant de réessayer.";
+    }else if(authMessage.includes("network")||authMessage.includes("fetch")){
+      message="Impossible de joindre le service de connexion. Vérifiez votre connexion Internet puis réessayez.";
+    }else if(error.message&&/profil|approuvé|type de compte/i.test(error.message)){
+      message=error.message;
+    }
+    feedback.innerHTML='<p class="form-note" role="alert" style="color:#bd3333">'+esc(message)+'</p>';
   }finally{
     button.disabled=false;button.textContent="Se connecter";
   }
