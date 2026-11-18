@@ -153,6 +153,11 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
   .hero .slider{height:480px;border-radius:0}
 }
 
+
+.footer-credit{line-height:1.8}
+.footer-credit span:first-child{display:inline-block;font-weight:700;color:#fff}
+.footer-credit span:last-child{display:inline-block;color:#c7d8cd}
+
 </style>
 </head>
 <body>
@@ -173,7 +178,6 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 <div class="slide" style="background-image:url('images/H%C3%A9ro/7.png')" role="img" aria-label="Photo 7 de la campagne citoyenne"></div>
 <div class="slide" style="background-image:url('images/H%C3%A9ro/8.png')" role="img" aria-label="Photo 8 de la campagne citoyenne"></div>
 <div class="hero-content"><div class="eyebrow">KINSHASA · SALONGO · ASSAINISSEMENT</div><h1>Kinshasa moto na moto abongisa.</h1></div>
-<div class="hero-actions"><button class="btn btn-primary" onclick="openRegister()">Rejoindre la communauté</button><button class="btn btn-outline" onclick="document.getElementById('carte').scrollIntoView({behavior:'smooth'})">Explorer la carte</button></div>
 <div class="slider-controls"><span class="slide-count" id="slide-count">01 / 08</span><button class="slide-arrow" onclick="changeSlide(-1)" aria-label="Photo précédente">‹</button><div id="slide-dots"></div><button class="slide-arrow" onclick="changeSlide(1)" aria-label="Photo suivante">›</button></div>
 </div></div></section>
 <section class="section" id="mission"><div class="container"><div class="section-head"><div><div class="kicker">Une plateforme citoyenne</div><h2>Agir, signaler, suivre et améliorer.</h2><p>Kinshasa moto na moto abongisa mobilise les citoyens, les volontaires et les autorités communales pour signaler les problèmes d’assainissement, organiser les actions de Salongo et suivre les résultats dans les 24 communes de Kinshasa.</p></div></div>
@@ -194,7 +198,7 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 </div></div></section>
 </main>
 <div id="application" class="hidden"></div>
-<footer><div class="container footer-inner"><div><div class="brand" style="color:white"><img class="brand-logo footer-brand-logo" src="images/logo/logo.jpg" alt="Logo Kinshasa moto na moto abongisa"><span class="brand-name"><strong>Kinshasa moto na moto abongisa</strong><small style="color:#a9c5b4">PROPRETÉ · CITOYENNETÉ · ACTION</small></span></div><p>Kinshasa propre, notre responsabilité à tous.</p></div><p>© 2026 Kinshasa moto na moto abongisa · Plateforme citoyenne pour un Kinshasa plus propre</p></div><div class="container partner-strip" aria-label="Logos des partenaires"><img src="images/foote/foote1.jpg" alt="Logo partenaire 1" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/foote2.jpg" alt="Logo partenaire 2" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/foote3.jpg" alt="Logo partenaire 3" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/Foote%204.jpg" alt="Logo partenaire 4" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"></div></footer>
+<footer><div class="container footer-inner"><div><div class="brand" style="color:white"><img class="brand-logo footer-brand-logo" src="images/logo/logo.jpg" alt="Logo Kinshasa moto na moto abongisa"><span class="brand-name"><strong>Kinshasa moto na moto abongisa</strong><small style="color:#a9c5b4">PROPRETÉ · CITOYENNETÉ · ACTION</small></span></div><p>Kinshasa propre, notre responsabilité à tous.</p></div><p class="footer-credit"><span>Développé par Limengo Daniel (Pmiller)</span><br><span>2026© Kinshasa moto na moto abongisa · Plateforme citoyenne pour un Kinshasa plus propre</span></p></div><div class="container partner-strip" aria-label="Logos des partenaires"><img src="images/foote/foote1.jpg" alt="Logo partenaire 1" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/foote2.jpg" alt="Logo partenaire 2" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/foote3.jpg" alt="Logo partenaire 3" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/Foote%204.jpg" alt="Logo partenaire 4" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"></div></footer>
 <div class="partner-lightbox" id="partner-lightbox" onclick="closePartnerImage(event)" aria-hidden="true"><button class="partner-lightbox-close" type="button" aria-label="Fermer" onclick="closePartnerImage(event)">×</button><img id="partner-lightbox-image" alt="Aperçu du logo partenaire" onclick="event.stopPropagation()"></div>
 
 <!-- Inscription -->
