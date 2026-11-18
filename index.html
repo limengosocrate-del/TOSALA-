@@ -100,6 +100,16 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
   .hero .hero-actions .btn{padding:11px 14px;font-size:12px}
 }
 
+
+/* Agrandissement des logos partenaires au toucher */
+.partner-strip img{cursor:zoom-in;transition:transform .2s ease,opacity .2s ease}
+.partner-strip img:focus-visible{outline:3px solid #65d99b;outline-offset:4px}
+.partner-lightbox{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(5,15,11,.94);backdrop-filter:blur(7px)}
+.partner-lightbox.open{display:flex}
+.partner-lightbox>img{display:block;max-width:min(94vw,1100px);max-height:88vh;width:auto;height:auto;object-fit:contain;background:#fff;border-radius:10px;padding:8px;box-shadow:0 18px 65px rgba(0,0,0,.45);cursor:default}
+.partner-lightbox-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border:1px solid #ffffff80;border-radius:50%;background:#ffffff18;color:#fff;font-size:30px;line-height:1;cursor:pointer}
+@media(max-width:600px){.partner-lightbox{padding:14px}.partner-lightbox>img{max-width:96vw;max-height:84vh;padding:5px}.partner-lightbox-close{top:10px;right:10px}}
+
 </style>
 </head>
 <body>
@@ -140,7 +150,8 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 </div></div></section>
 </main>
 <div id="application" class="hidden"></div>
-<footer><div class="container footer-inner"><div><div class="brand" style="color:white"><img class="brand-logo footer-brand-logo" src="images/logo/logo.jpg" alt="Logo Kinshasa moto na moto abongisa"><span class="brand-name"><strong>Kinshasa moto na moto abongisa</strong><small style="color:#a9c5b4">PROPRETÉ · CITOYENNETÉ · ACTION</small></span></div><p>Kinshasa propre, notre responsabilité à tous.</p></div><p>© 2026 Kinshasa moto na moto abongisa · Plateforme citoyenne pour un Kinshasa plus propre</p></div><div class="container partner-strip" aria-label="Logos des partenaires"><img src="images/foote/foote1.jpg" alt=""><img src="images/foote/foote2.jpg" alt=""><img src="images/foote/foote3.jpg" alt=""><img src="images/foote/Foote%204.jpg" alt=""></div></footer>
+<footer><div class="container footer-inner"><div><div class="brand" style="color:white"><img class="brand-logo footer-brand-logo" src="images/logo/logo.jpg" alt="Logo Kinshasa moto na moto abongisa"><span class="brand-name"><strong>Kinshasa moto na moto abongisa</strong><small style="color:#a9c5b4">PROPRETÉ · CITOYENNETÉ · ACTION</small></span></div><p>Kinshasa propre, notre responsabilité à tous.</p></div><p>© 2026 Kinshasa moto na moto abongisa · Plateforme citoyenne pour un Kinshasa plus propre</p></div><div class="container partner-strip" aria-label="Logos des partenaires"><img src="images/foote/foote1.jpg" alt="Logo partenaire 1" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/foote2.jpg" alt="Logo partenaire 2" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/foote3.jpg" alt="Logo partenaire 3" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"><img src="images/foote/Foote%204.jpg" alt="Logo partenaire 4" role="button" tabindex="0" onclick="openPartnerImage(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openPartnerImage(this)}"></div></footer>
+<div class="partner-lightbox" id="partner-lightbox" onclick="closePartnerImage(event)" aria-hidden="true"><button class="partner-lightbox-close" type="button" aria-label="Fermer" onclick="closePartnerImage(event)">×</button><img id="partner-lightbox-image" alt="Aperçu du logo partenaire" onclick="event.stopPropagation()"></div>
 
 <!-- Inscription -->
 <div class="modal-backdrop" id="register-modal" onclick="backdropClose(event,'register-modal')"><div class="modal"><div class="modal-head"><h2>Rejoindre Kinshasa moto na moto abongisa</h2><button class="close" onclick="closeModal('register-modal')">×</button></div><div class="modal-body">
@@ -724,6 +735,9 @@ function resetMap(){if(map)map.setView([-4.325,15.322],11)}
 function selectCommune(name,btn){document.querySelectorAll(".commune-btn").forEach(b=>b.classList.remove("selected"));if(btn)btn.classList.add("selected");const detail=document.getElementById("commune-detail");detail.innerHTML=`<strong>${esc(name)}</strong><p>Commune de la ville-province de Kinshasa.<br>Quartiers référencés : <b>à renseigner</b><br>Avenues référencées : <b>à renseigner</b><br>Bourgmestre vérifié : <b>à confirmer</b><br>Signalements et opérations : données disponibles après connexion à la base centrale.</p>`;if(map){map.setView([-4.325,15.322],11);}}
 function renderCommuneButtons(filter=""){const box=document.getElementById("commune-list");if(!box)return;box.innerHTML=COMMUNES.filter(c=>c.toLowerCase().includes(filter.toLowerCase())).map(c=>`<button class="commune-btn" onclick="selectCommune('${c}',this)">${esc(c)}</button>`).join("")}
 function filterCommunes(){renderCommuneButtons(document.getElementById("commune-search").value)}
+function openPartnerImage(el){const modal=document.getElementById("partner-lightbox"),img=document.getElementById("partner-lightbox-image");if(!modal||!img||!el)return;img.src=el.currentSrc||el.src;img.alt=el.alt||"Logo partenaire";modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";const close=modal.querySelector(".partner-lightbox-close");if(close)close.focus()}
+function closePartnerImage(event){if(event&&event.type==="click"&&event.target!==event.currentTarget&&!event.target.classList.contains("partner-lightbox-close"))return;const modal=document.getElementById("partner-lightbox"),img=document.getElementById("partner-lightbox-image");if(!modal)return;modal.classList.remove("open");modal.setAttribute("aria-hidden","true");if(img)img.removeAttribute("src");document.body.style.overflow=""}
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){const modal=document.getElementById("partner-lightbox");if(modal&&modal.classList.contains("open"))closePartnerImage()}});
 function initSlider(){const slides=[...document.querySelectorAll(".slide")],dots=document.getElementById("slide-dots");if(!slides.length||!dots)return;dots.innerHTML=slides.map((_,i)=>`<button class="dot ${i===0?"active":""}" onclick="goSlide(${i})" aria-label="Afficher la photo ${i+1}"></button>`).join("");if(slideTimer)clearInterval(slideTimer);slideTimer=setInterval(()=>changeSlide(1),5000)}
 function goSlide(n){const slides=[...document.querySelectorAll(".slide")];currentSlide=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle("active",i===currentSlide));document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("active",i===currentSlide));document.getElementById("slide-count").textContent=String(currentSlide+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0")}
 function changeSlide(step){goSlide(currentSlide+step)}
