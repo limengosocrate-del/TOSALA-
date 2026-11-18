@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#087443">
+<meta name="application-name" content="Kinshasa moto na moto abongisa">
+<meta name="description" content="Kinshasa moto na moto abongisa : plateforme citoyenne pour signaler, participer et agir ensemble pour une ville plus propre.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kinshasa moto na moto abongisa">
+<meta property="og:description" content="Plateforme citoyenne pour signaler, participer et agir ensemble pour une ville plus propre.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kinshasa moto na moto abongisa">
+<meta name="twitter:description" content="Plateforme citoyenne pour un Kinshasa plus propre.">
 <link rel="manifest" href="./manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -631,7 +639,7 @@ async function renderAdminCommunications(){
   <div class="field full"><label>Message *</label><textarea name="message" rows="7" required maxlength="5000" placeholder="Rédigez votre communication officielle…"></textarea></div>
   </div><div class="panel" style="padding:14px;margin-top:14px;background:#f7faf8"><b>Aperçu de la signature</b><p id="tosala-communication-preview" style="line-height:1.7;margin-bottom:0">Le Bourgmestre de la commune sélectionnée, Monsieur [NOM DU BOURGMESTRE].</p></div>
   <div class="alert-box">L'envoi réel dépend de la configuration de la fonction Supabase Edge « tosala-send-email » et de son fournisseur e-mail. Aucun e-mail ne sera déclaré envoyé tant que le service n'aura pas confirmé l'opération.</div><button class="btn btn-primary" type="submit">Envoyer la communication</button><div id="email-send-feedback" class="form-note" style="margin-top:10px"></div></form></div>
-  <div class="panel" style="margin-top:15px"><h3>Règle pour les messages automatiques</h3><p>Les accusés de réception d'inscription, les confirmations d'approbation et les notifications de refus devront utiliser la commune du candidat et le nom de son bourgmestre.</p><p><b>Exemple :</b> « Le Bourgmestre de la commune de la Nsele, Monsieur [NOM DU BOURGMESTRE], vous souhaite la bienvenue au sein de Kinshasa Salongo Assainissement – Kinshasa moto na moto abongisa. »</p></div>`;
+  <div class="panel" style="margin-top:15px"><h3>Règle pour les messages automatiques</h3><p>Les accusés de réception d'inscription, les confirmations d'approbation et les notifications de refus devront utiliser la commune du candidat et le nom de son bourgmestre.</p><p><b>Exemple :</b> « Le Bourgmestre de la commune de la Nsele, Monsieur [NOM DU BOURGMESTRE], vous souhaite la bienvenue au sein de Kinshasa moto na moto abongisa. »</p></div>`;
   toggleCommunicationCommune();
  }catch(error){content.innerHTML+=`<div class="alert-box">Impossible de charger les communes : ${esc(error.message||"Erreur inconnue")}</div>`;}
 }
