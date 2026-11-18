@@ -76,6 +76,30 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
   .partner-strip img:nth-child(2),.partner-strip img:nth-child(3),.partner-strip img:nth-child(4){height:36px}
 }
 
+
+/* Hero : titre positionné dans la zone supérieure indiquée, lisible sur mobile */
+.hero .hero-content{
+  top:7%;left:6%;transform:none;width:min(760px,88%);
+  text-shadow:0 2px 14px rgba(0,0,0,.45);
+}
+.hero .eyebrow{
+  display:inline-block;font-size:clamp(10px,1.2vw,13px);
+  letter-spacing:clamp(1px,.22vw,2.2px);line-height:1.5;
+  padding:7px 11px;border-radius:7px;
+  background:rgba(4,38,24,.48);backdrop-filter:blur(3px);
+}
+.hero h1{
+  max-width:680px;font-size:clamp(27px,4.2vw,46px);
+  line-height:1.08;margin:9px 0 0;
+}
+@media(max-width:600px){
+  .hero .hero-content{top:6%;left:6%;width:88%}
+  .hero .eyebrow{font-size:10px;letter-spacing:1.1px;padding:6px 8px}
+  .hero h1{font-size:clamp(23px,6.2vw,30px);line-height:1.12;margin-top:8px}
+  .hero .hero-actions{margin-top:15px;gap:8px}
+  .hero .hero-actions .btn{padding:11px 14px;font-size:12px}
+}
+
 </style>
 </head>
 <body>
