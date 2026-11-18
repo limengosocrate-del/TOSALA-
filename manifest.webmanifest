@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Kinshasa moto na moto abongisa",
   "short_name": "Kinshasa moto na moto abongisa",
-  "description": "Plateforme citoyenne pour un Kinshasa plus propre.",
+  "description": "Application citoyenne de Kinshasa pour signaler les problèmes, participer aux actions communautaires et améliorer la ville ensemble.",
   "lang": "fr-CD",
   "start_url": "./",
   "scope": "./",
