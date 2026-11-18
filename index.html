@@ -300,8 +300,9 @@ async function login(e){
       commune:meta.commune||("Commune ID "+(profile.commune_id??"à confirmer")),
       communeId:profile.commune_id??null
     };
-    closeModal("login-modal");renderApp();
+    closeModal("login-modal");
     startPresenceTracking();
+    renderApp();
     if(["admin","super_admin"].includes(currentUser.role))startAdminPresenceMonitor();
   }catch(error){
     console.error("Connexion TOSALA:",error);
