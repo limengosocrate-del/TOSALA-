@@ -136,6 +136,23 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
  .hero .slider>.hero-actions .btn{font-size:clamp(10px,2.8vw,12px);padding:10px 11px;min-height:42px}
 }
 
+
+/* Bannière héro en pleine largeur, bord à bord comme InspecteurBot */
+.hero{
+  padding:10px 0 30px;
+  margin-top:0;
+}
+.hero>.container{
+  width:100%;max-width:none;margin:0;padding-left:0;padding-right:0;
+}
+.hero .slider{
+  width:100%;border-radius:0;
+}
+@media(max-width:600px){
+  .hero{padding:6px 0 26px}
+  .hero .slider{height:480px;border-radius:0}
+}
+
 </style>
 </head>
 <body>
