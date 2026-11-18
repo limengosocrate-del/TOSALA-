@@ -118,6 +118,24 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
   .hero .hero-actions .btn{min-height:44px}
 }
 
+
+/* Boutons du héro centrés au-dessus de la pagination */
+.hero .slider{position:relative}
+.hero .slider>.hero-actions{
+  position:absolute;z-index:5;left:50%;bottom:68px;
+  transform:translateX(-50%);display:flex;flex-direction:row;
+  flex-wrap:nowrap;align-items:center;justify-content:center;
+  gap:13px;width:max-content;max-width:calc(100% - 22px);margin:0;
+}
+.hero .slider>.hero-actions .btn{flex:0 1 auto;white-space:nowrap;min-height:44px}
+.hero .slider>.hero-actions .btn-primary{background:#087b4b;color:#fff;border-color:#087b4b}
+.hero .slider>.hero-actions .btn-outline{background:rgba(55,65,60,.68);border-color:rgba(255,255,255,.72);color:#fff;backdrop-filter:blur(7px)}
+.hero .slider-controls{z-index:4;bottom:22px}
+@media(max-width:600px){
+ .hero .slider>.hero-actions{bottom:68px;gap:10px}
+ .hero .slider>.hero-actions .btn{font-size:clamp(10px,2.8vw,12px);padding:10px 11px;min-height:42px}
+}
+
 </style>
 </head>
 <body>
@@ -137,7 +155,8 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 <div class="slide" style="background-image:url('images/H%C3%A9ro/6.png')" role="img" aria-label="Photo 6 de la campagne citoyenne"></div>
 <div class="slide" style="background-image:url('images/H%C3%A9ro/7.png')" role="img" aria-label="Photo 7 de la campagne citoyenne"></div>
 <div class="slide" style="background-image:url('images/H%C3%A9ro/8.png')" role="img" aria-label="Photo 8 de la campagne citoyenne"></div>
-<div class="hero-content"><div class="eyebrow">KINSHASA · SALONGO · ASSAINISSEMENT</div><h1>Kinshasa moto na moto abongisa.</h1><div class="hero-actions"><button class="btn btn-primary" onclick="openRegister()">Rejoindre la communauté</button><button class="btn btn-outline" onclick="document.getElementById('carte').scrollIntoView({behavior:'smooth'})">Explorer la carte</button></div></div>
+<div class="hero-content"><div class="eyebrow">KINSHASA · SALONGO · ASSAINISSEMENT</div><h1>Kinshasa moto na moto abongisa.</h1></div>
+<div class="hero-actions"><button class="btn btn-primary" onclick="openRegister()">Rejoindre la communauté</button><button class="btn btn-outline" onclick="document.getElementById('carte').scrollIntoView({behavior:'smooth'})">Explorer la carte</button></div>
 <div class="slider-controls"><span class="slide-count" id="slide-count">01 / 08</span><button class="slide-arrow" onclick="changeSlide(-1)" aria-label="Photo précédente">‹</button><div id="slide-dots"></div><button class="slide-arrow" onclick="changeSlide(1)" aria-label="Photo suivante">›</button></div>
 </div></div></section>
 <section class="section" id="mission"><div class="container"><div class="section-head"><div><div class="kicker">Une plateforme citoyenne</div><h2>Agir, signaler, suivre et améliorer.</h2><p>Kinshasa moto na moto abongisa mobilise les citoyens, les volontaires et les autorités communales pour signaler les problèmes d’assainissement, organiser les actions de Salongo et suivre les résultats dans les 24 communes de Kinshasa.</p></div></div>
