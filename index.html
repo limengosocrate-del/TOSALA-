@@ -628,7 +628,7 @@ async function submitReport(e){
    const {error:insertError}=await tosalaSupabase.from("citizen_messages").insert({user_id:currentUser.id,category:"signalement",subject:String(f.get("type")),message:String(f.get("description")),commune:String(f.get("commune")),quartier:String(f.get("quartier")||""),avenue:String(f.get("avenue")||""),reference_lieu:String(f.get("reference")||""),photo_path:path});
    if(insertError)throw insertError;
    alert("Votre signalement et sa photo ont été transmis à l'administration TOSALA.");
-   renderMemberMessages();
+   renderMemberReports();
  }catch(err){console.error(err);if(path)await tosalaSupabase.storage.from("tosala-messages").remove([path]);button.disabled=false;button.textContent="Réessayer l'envoi";alert("Envoi impossible : "+(err.message||"erreur inconnue")+". Votre formulaire est conservé, vous pouvez réessayer.");}
 }
 function citizenRoleLabel(role){const r=String(role||"").toLowerCase();if(["volunteer","volontaire"].includes(r))return "Volontaire";if(["ambassador","ambassadeur"].includes(r))return "Ambassadeur";if(r==="admin")return "Administrateur";return "Membre TOSALA";}
