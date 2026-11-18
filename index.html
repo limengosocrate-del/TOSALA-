@@ -37,6 +37,7 @@ footer{background:#0b2f20;color:#d9e9df;padding:35px 0;margin-top:35px}.footer-i
 .photo-preview{margin-top:8px}
 .muted{color:#718078;font-size:12px}
 input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-radius:10px;background:#f8fbf9}
+.photo-actions{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}.photo-choice{display:inline-flex;align-items:center;gap:8px;border:1px solid #cfe0d4;background:#f4faf6;color:#145d39;border-radius:12px;padding:12px 15px;font-size:13px;font-weight:800}.photo-choice:active{transform:scale(.98)}.photo-stage{margin-top:12px;padding:12px;border:1px dashed #bfd2c5;border-radius:14px;background:#f8fbf9;display:flex;align-items:center;gap:13px}.photo-stage img{width:104px;height:104px;object-fit:cover;border-radius:12px;background:#e8eee9}.photo-stage-info{min-width:0;font-size:12px;line-height:1.5}.photo-stage-info strong{display:block;overflow-wrap:anywhere}.photo-stage-info button{margin-top:7px}
 </style>
 </head>
 <body>
@@ -586,39 +587,48 @@ function renderMemberHome(){const isAmb=currentUser.role==="ambassador";document
 function openReportForm(){
  const existing=document.getElementById("report-form-panel");if(existing)existing.remove();
  document.getElementById("member-content").insertAdjacentHTML("afterbegin",`<div class="panel" id="report-form-panel" style="margin-bottom:15px">
- <div class="app-title"><div><div class="kicker">Transmission à l'administration</div><h2>Nouveau signalement citoyen</h2><p>Prenez une photo du problème, indiquez précisément le lieu et ajoutez votre commentaire.</p></div></div>
- <form onsubmit="submitReport(event)"><div class="form-grid">
- <div class="field"><label>Type de problème</label><select name="type" required><option>Dépôt sauvage d'ordures</option><option>Caniveau bouché</option><option>Inondation</option><option>Décharge / insalubrité</option><option>Occupation anarchique</option><option>Autre</option></select></div>
+ <div class="app-title"><div><div class="kicker">Transmission sécurisée à l'administration</div><h2>Nouveau signalement citoyen</h2><p>Prenez une photo claire du problème, précisez le lieu et décrivez la situation.</p></div></div>
+ <form id="citizen-report-form" onsubmit="submitReport(event)"><div class="form-grid">
+ <div class="field"><label>Type de problème *</label><select name="type" required><option>Dépôt sauvage d'ordures</option><option>Caniveau bouché</option><option>Inondation</option><option>Décharge / insalubrité</option><option>Occupation anarchique</option><option>Autre</option></select></div>
  <div class="field"><label>Commune *</label><select name="commune" required>${COMMUNES.map(c=>`<option ${c===currentUser.commune?"selected":""}>${c}</option>`).join("")}</select></div>
  <div class="field"><label>Quartier</label><input name="quartier" maxlength="120" placeholder="Nom du quartier"></div>
  <div class="field"><label>Avenue / rue</label><input name="avenue" maxlength="150" placeholder="Nom de l'avenue ou de la rue"></div>
  <div class="field full"><label>Référence / point de repère</label><input name="reference" maxlength="200" placeholder="Ex. près de l'école, arrêt de bus, numéro parcellaire…"></div>
- <div class="field full"><label>Photo du problème *</label><input id="report-photo" type="file" accept="image/*" capture="environment" name="photo" required><small class="muted">Sur téléphone, ce bouton peut ouvrir directement l'appareil photo. Une seule photo par signalement.</small><div id="photo-preview" class="photo-preview"></div></div>
- <div class="field full"><label>Commentaire / description (maximum 2 000 caractères) *</label><textarea name="description" required maxlength="2000" rows="6" oninput="document.getElementById('report-char-count').textContent=this.value.length+' / 2 000 caractères'" placeholder="Expliquez le problème, son ampleur, depuis quand il existe et les risques pour les habitants…"></textarea><small id="report-char-count" class="muted">0 / 2 000 caractères</small></div>
- </div><p class="form-note">Votre signalement sera transmis dans la boîte de réception de l'administrateur. Vérifiez les informations avant l'envoi.</p>
- <button class="btn btn-primary" id="report-submit-btn" style="margin-top:12px">Envoyer à l'administrateur</button> <button type="button" class="btn btn-outline" onclick="document.getElementById('report-form-panel').remove()">Annuler</button></form></div>`);
- const photoInput=document.getElementById("report-photo");
- photoInput.addEventListener("change",()=>{const file=photoInput.files[0],preview=document.getElementById("photo-preview");if(!file){preview.innerHTML="";return;}if(!file.type.startsWith("image/")){alert("Veuillez choisir une image.");photoInput.value="";return;}preview.textContent=file.name+" · "+(file.size/1024/1024).toFixed(1)+" Mo";});
- document.getElementById("report-form-panel").scrollIntoView({behavior:"smooth"});
+ <div class="field full"><label>Photo du problème *</label>
+ <div class="photo-actions"><button type="button" class="photo-choice" onclick="document.getElementById('report-camera').click()">📷 Prendre une photo</button><button type="button" class="photo-choice" onclick="document.getElementById('report-gallery').click()">🖼️ Choisir dans la galerie</button></div>
+ <input id="report-camera" type="file" accept="image/*" capture="environment" hidden><input id="report-gallery" type="file" accept="image/*" hidden>
+ <div id="photo-preview" class="photo-preview"><div class="form-note">Aucune photo sélectionnée. Une photo nette et récente aide l'administration à vérifier le signalement.</div></div></div>
+ <div class="field full"><label>Commentaire / description (maximum 2 000 caractères) *</label><textarea name="description" required maxlength="2000" rows="5" oninput="document.getElementById('report-char-count').textContent=this.value.length+' / 2 000 caractères'" placeholder="Expliquez le problème, son ampleur, depuis quand il existe et les risques pour les habitants…"></textarea><small id="report-char-count" class="muted">0 / 2 000 caractères</small></div>
+ </div><p class="form-note">Votre photo sera automatiquement redimensionnée et compressée avant son transfert. Elle sera envoyée uniquement avec votre signalement à l'administration TOSALA.</p>
+ <button class="btn btn-primary" id="report-submit-btn" style="margin-top:12px" disabled>Envoyer à l'administrateur</button> <button type="button" class="btn btn-outline" onclick="document.getElementById('report-form-panel').remove()">Annuler</button></form></div>`);
+ const camera=document.getElementById("report-camera"),gallery=document.getElementById("report-gallery");
+ const selectPhoto=file=>{const preview=document.getElementById("photo-preview"),submit=document.getElementById("report-submit-btn");if(!file){preview.innerHTML='<div class="form-note">Aucune photo sélectionnée.</div>';submit.disabled=true;return;}if(!file.type.startsWith("image/")){alert("Veuillez choisir une photo au format image.");camera.value="";gallery.value="";return;}if(file.size>15*1024*1024){alert("Cette photo dépasse 15 Mo. Choisissez une photo plus légère.");camera.value="";gallery.value="";return;}const url=URL.createObjectURL(file);preview.innerHTML='<div class="photo-stage"><img src="'+url+'" alt="Aperçu de la photo sélectionnée"><div class="photo-stage-info"><strong>'+esc(file.name||"Photo prise avec l'appareil")+'</strong><span>'+((file.size/1024/1024).toFixed(2))+' Mo · Aperçu avant envoi</span><br><button type="button" class="btn btn-outline btn-sm" onclick="clearReportPhoto()">Retirer la photo</button></div></div>';submit.disabled=false;};
+ camera.addEventListener("change",()=>{gallery.value="";selectPhoto(camera.files[0]);});
+ gallery.addEventListener("change",()=>{camera.value="";selectPhoto(gallery.files[0]);});
+ window.clearReportPhoto=()=>{camera.value="";gallery.value="";document.getElementById("photo-preview").innerHTML='<div class="form-note">Aucune photo sélectionnée.</div>';document.getElementById("report-submit-btn").disabled=true;};
+ document.getElementById("report-form-panel").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function compressReportPhoto(file){
  return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error("Lecture impossible."));
  reader.onload=()=>{const img=new Image();img.onerror=()=>reject(new Error("Image non valide."));img.onload=()=>{const max=1400,scale=Math.min(1,max/Math.max(img.width,img.height)),canvas=document.createElement("canvas");canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL("image/jpeg",0.72));};img.src=reader.result;};reader.readAsDataURL(file);});
 }
 async function submitReport(e){
- e.preventDefault();const f=new FormData(e.target),file=f.get("photo"),button=document.getElementById("report-submit-btn");
- if(!file||!file.size){alert("Veuillez prendre ou joindre une photo du problème.");return;}
- button.disabled=true;button.textContent="Envoi en cours…";
+ e.preventDefault();const f=new FormData(e.target),camera=document.getElementById("report-camera"),gallery=document.getElementById("report-gallery"),file=(camera&&camera.files[0])||(gallery&&gallery.files[0]),button=document.getElementById("report-submit-btn");
+ if(!file||!file.size){alert("Prenez une photo ou choisissez-en une dans votre galerie.");return;}
+ if(!tosalaSupabase||!currentUser?.id){alert("Votre session n'est plus active. Reconnectez-vous.");return;}
+ button.disabled=true;button.textContent="Compression et envoi…";
+ let path=null;
  try{
-   if(!tosalaSupabase||!currentUser?.id)throw new Error("Session Supabase absente. Reconnectez-vous.");
-   const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
-   const path=`${currentUser.id}/${crypto.randomUUID()}.${ext}`;
-   const {error:uploadError}=await tosalaSupabase.storage.from("tosala-messages").upload(path,file,{contentType:file.type||"image/jpeg",upsert:false});
+   const dataUrl=await compressReportPhoto(file),blob=await (await fetch(dataUrl)).blob();
+   if(!blob||!blob.size)throw new Error("La compression de la photo a échoué. Réessayez avec une autre image.");
+   path=currentUser.id+"/"+crypto.randomUUID()+".jpg";
+   const {error:uploadError}=await tosalaSupabase.storage.from("tosala-messages").upload(path,blob,{contentType:"image/jpeg",upsert:false,cacheControl:"3600"});
    if(uploadError)throw uploadError;
    const {error:insertError}=await tosalaSupabase.from("citizen_messages").insert({user_id:currentUser.id,category:"signalement",subject:String(f.get("type")),message:String(f.get("description")),commune:String(f.get("commune")),quartier:String(f.get("quartier")||""),avenue:String(f.get("avenue")||""),reference_lieu:String(f.get("reference")||""),photo_path:path});
-   if(insertError){await tosalaSupabase.storage.from("tosala-messages").remove([path]);throw insertError;}
-   alert("Votre signalement et sa photo ont été transmis à l'administration TOSALA.");renderMemberMessages();
- }catch(err){console.error(err);button.disabled=false;button.textContent="Envoyer à l'administrateur";alert("Envoi impossible : "+(err.message||"vérifiez la configuration SQL et du stockage TOSALA."));}
+   if(insertError)throw insertError;
+   alert("Votre signalement et sa photo ont été transmis à l'administration TOSALA.");
+   renderMemberMessages();
+ }catch(err){console.error(err);if(path)await tosalaSupabase.storage.from("tosala-messages").remove([path]);button.disabled=false;button.textContent="Réessayer l'envoi";alert("Envoi impossible : "+(err.message||"erreur inconnue")+". Votre formulaire est conservé, vous pouvez réessayer.");}
 }
 function citizenRoleLabel(role){const r=String(role||"").toLowerCase();if(["volunteer","volontaire"].includes(r))return "Volontaire";if(["ambassador","ambassadeur"].includes(r))return "Ambassadeur";if(r==="admin")return "Administrateur";return "Membre TOSALA";}
 function citizenPhotoExpiry(createdAt){return new Date(new Date(createdAt).getTime()+72*60*60*1000);}
