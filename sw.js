@@ -1,4 +1,4 @@
-const CACHE_NAME="kinshasa-moto-na-moto-abongisa-shell-v6";
+const CACHE_NAME="kinshasa-moto-na-moto-abongisa-shell-v7";
 const SHELL=["./","./index.html","./manifest.webmanifest","./images/logo/logo.jpg","./pwa-icon-192.svg","./pwa-icon-512.svg"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(SHELL)).catch(()=>{}));self.skipWaiting();});
 self.addEventListener("activate",event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>(key.startsWith("tosala-shell-")||key.startsWith("kinshasa-moto-na-moto-abongisa-shell-"))&&key!==CACHE_NAME).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));});
