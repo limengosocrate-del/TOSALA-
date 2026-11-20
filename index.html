@@ -268,6 +268,42 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
  .app-footer{padding:21px 12px}
  .app-footer .partner-strip img{height:32px;max-width:82px}
 }
+
+/* Typographie renforcée de l'en-tête pour tous les espaces et tous les rôles */
+.app-header>.brand{gap:11px;min-width:0}
+.app-header>.brand .brand-logo{width:52px;height:52px;flex:0 0 52px}
+.app-header>.brand strong{display:block;font-family:Manrope,Arial,sans-serif;font-size:clamp(19px,2vw,24px);font-weight:900;line-height:1.12;letter-spacing:.15px;color:#123d29;white-space:normal}
+.app-header>.brand small{display:block;margin-top:5px;font-family:Inter,Arial,sans-serif;font-size:13px;font-weight:800;line-height:1.2;letter-spacing:1.15px;color:#17804a}
+.app-header-tools{gap:10px}
+.app-header .header-action{width:46px;height:46px;font-size:22px;border-radius:14px}
+.app-header .profile-avatar-header{width:48px;height:48px;flex-basis:48px}
+.app-header .profile-summary{gap:11px}
+.app-header .profile-summary-copy{gap:4px}
+.app-header .profile-summary-copy strong{font-family:Manrope,Arial,sans-serif;font-size:14px;font-weight:800;line-height:1.2;color:#1b3025;max-width:260px}
+.app-header .profile-summary-copy small{font-family:Inter,Arial,sans-serif;font-size:12px;font-weight:600;line-height:1.25;color:#65776c;max-width:280px}
+.app-header .app-user>.btn{font-size:12px;font-weight:800}
+@media(max-width:900px){
+ .app-header{gap:12px;padding-left:14px;padding-right:14px}
+ .app-header>.brand strong{font-size:clamp(17px,3.2vw,21px)}
+ .app-header>.brand small{font-size:12px;letter-spacing:.9px}
+ .app-header .profile-summary-copy strong{font-size:13px;max-width:190px}
+ .app-header .profile-summary-copy small{font-size:11px;max-width:200px}
+}
+@media(max-width:700px){
+ .app-header{grid-template-columns:minmax(0,1fr) auto;column-gap:10px;row-gap:10px}
+ .app-header>.brand{grid-column:1;grid-row:1;gap:8px}
+ .app-header>.brand .brand-logo{width:44px;height:44px;flex-basis:44px}
+ .app-header>.brand strong{font-size:17px;line-height:1.15;letter-spacing:0}
+ .app-header>.brand small{font-size:11px;letter-spacing:.75px;margin-top:4px}
+ .app-header>.app-header-tools{grid-column:2;grid-row:1;justify-self:end}
+ .app-header>.app-user{grid-column:1 / -1;grid-row:2;justify-self:stretch;display:flex;justify-content:space-between;gap:8px;padding-top:9px;border-top:1px solid #edf2ee}
+ .app-header .profile-avatar-header{width:46px;height:46px;flex-basis:46px}
+ .app-header .profile-summary{gap:9px}
+ .app-header .profile-summary-copy strong{font-size:14px;max-width:min(62vw,270px)}
+ .app-header .profile-summary-copy small{font-size:12px;max-width:min(68vw,300px)}
+ .app-header .header-action{width:42px;height:42px;font-size:21px}
+ .app-header .app-user>.btn{padding:8px 10px;font-size:11px;white-space:nowrap}
+}
 </style>
 </head>
 <body>
