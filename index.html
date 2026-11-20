@@ -471,8 +471,7 @@ function renderApp(){
   app.classList.remove("hidden");
   if(["admin","super_admin"].includes(currentUser.role)){
     app.innerHTML=adminShell();
-    renderAdminHome();
-    adminView("requests",document.querySelector('.sidebar [data-view="requests"]'));
+    adminView("home",document.querySelector('.sidebar [data-view="home"]'));
   }else{
     app.innerHTML=memberShell();
     renderMemberHome();
