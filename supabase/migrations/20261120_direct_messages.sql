@@ -8,19 +8,27 @@ create table if not exists public.direct_messages (
 );
 create index if not exists direct_messages_user_created_idx on public.direct_messages(user_id,created_at asc);
 create index if not exists direct_messages_unread_idx on public.direct_messages(user_id,read_at) where read_at is null;
-create or replace function public.tosala_is_admin() returns boolean language sql stable security definer set search_path=public
-as $$ select exists(select 1 from public.profiles p where p.user_id=auth.uid() and p.approuve=true and lower(coalesce(p.role,'')) in ('admin','super_admin')); $$;
-revoke all on function public.tosala_is_admin() from public;
-grant execute on function public.tosala_is_admin() to authenticated;
 alter table public.direct_messages enable row level security;
-drop policy if exists "direct_messages_read_own_or_admin" on public.direct_messages;
-create policy "direct_messages_read_own_or_admin" on public.direct_messages for select to authenticated using(user_id=auth.uid() or public.tosala_is_admin());
-drop policy if exists "direct_messages_send_own_or_admin" on public.direct_messages;
-create policy "direct_messages_send_own_or_admin" on public.direct_messages for insert to authenticated with check(sender_id=auth.uid() and (user_id=auth.uid() or public.tosala_is_admin()));
-drop policy if exists "direct_messages_mark_read" on public.direct_messages;
-create policy "direct_messages_mark_read" on public.direct_messages for update to authenticated using(user_id=auth.uid() or public.tosala_is_admin()) with check(user_id=auth.uid() or public.tosala_is_admin());
-drop policy if exists "direct_messages_delete_admin" on public.direct_messages;
-create policy "direct_messages_delete_admin" on public.direct_messages for delete to authenticated using(public.tosala_is_admin());
-revoke update on public.direct_messages from authenticated;
+revoke all on public.direct_messages from anon, authenticated;
 grant select,insert,delete on public.direct_messages to authenticated;
 grant update(read_at) on public.direct_messages to authenticated;
+drop policy if exists "direct_messages_read_own_or_admin" on public.direct_messages;
+create policy "direct_messages_read_own_or_admin" on public.direct_messages for select to authenticated
+using ((select auth.uid())=user_id or (select public.is_admin()));
+drop policy if exists "direct_messages_send_own_or_admin" on public.direct_messages;
+create policy "direct_messages_send_own_or_admin" on public.direct_messages for insert to authenticated
+with check ((select auth.uid())=sender_id and ((select auth.uid())=user_id or (select public.is_admin())));
+drop policy if exists "direct_messages_mark_read" on public.direct_messages;
+create policy "direct_messages_mark_read" on public.direct_messages for update to authenticated
+using ((select auth.uid())=user_id or (select public.is_admin()))
+with check ((select auth.uid())=user_id or (select public.is_admin()));
+drop policy if exists "direct_messages_delete_admin" on public.direct_messages;
+create policy "direct_messages_delete_admin" on public.direct_messages for delete to authenticated
+using ((select public.is_admin()));
+do $$
+begin
+ if exists(select 1 from pg_publication where pubname='supabase_realtime')
+ and not exists(select 1 from pg_publication_tables where pubname='supabase_realtime' and schemaname='public' and tablename='direct_messages') then
+  alter publication supabase_realtime add table public.direct_messages;
+ end if;
+end $$;
