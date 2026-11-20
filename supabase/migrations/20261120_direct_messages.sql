@@ -7,6 +7,7 @@ create table if not exists public.direct_messages (
  read_at timestamptz
 );
 create index if not exists direct_messages_user_created_idx on public.direct_messages(user_id,created_at asc);
+create index if not exists direct_messages_sender_id_idx on public.direct_messages(sender_id);
 create index if not exists direct_messages_unread_idx on public.direct_messages(user_id,read_at) where read_at is null;
 alter table public.direct_messages enable row level security;
 revoke all on public.direct_messages from anon, authenticated;
