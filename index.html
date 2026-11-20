@@ -508,6 +508,7 @@ function renderApp(){
     adminView("home",document.querySelector('.sidebar [data-view="home"]'));
   }else{
     app.innerHTML=memberShell();
+    startHeaderRealtime();
     renderMemberHome();
   }
   window.scrollTo(0,0);
