@@ -210,7 +210,7 @@ input[type=file]{max-width:100%;padding:10px;border:1px dashed #aebdb3;border-ra
 @media(max-width:760px){.app-header{min-height:70px;gap:8px;padding:8px 10px;flex-wrap:wrap}.app-header .brand{gap:8px;flex:1 1 48%;min-width:170px}.app-header .brand-logo{width:40px;height:40px;flex-basis:40px}.app-header .brand strong{font-size:11px}.app-header .brand small{font-size:8px;letter-spacing:.5px}.app-header-tools{gap:5px}.header-action{width:36px;height:36px;border-radius:11px;font-size:17px}.app-user{gap:7px;flex:0 1 auto}.profile-avatar-header{width:36px;height:36px;flex-basis:36px}.profile-summary{gap:6px}.profile-summary-copy strong{font-size:10px;max-width:120px}.profile-summary-copy small{font-size:9px;max-width:130px}.app-user>.btn{font-size:9px;padding:7px 9px}}
 @media(max-width:430px){.app-header{align-items:center}.app-header .brand{min-width:145px;flex-basis:45%}.app-header .brand-logo{width:34px;height:34px;flex-basis:34px}.app-header .brand strong{font-size:10px}.app-header .brand small{font-size:7px}.app-header-tools{order:3;width:100%;justify-content:flex-end;margin-top:-2px}.app-user{margin-left:auto}.profile-summary-copy strong{max-width:112px}.profile-summary-copy small{max-width:115px}}
 
-</style>
+\n/* Lecture confortable : typographie agrandie sur ordinateur et mobile */\nbody{font-size:16px}\n.topbar{font-size:13px}\n.navlinks a,.btn{font-size:14px}\n.field label{font-size:13px}\n.field input,.field select,.field textarea{font-size:16px;padding:14px}\n.form-note,.alert-box,.success-box{font-size:13px}\n.app-user{font-size:14px}\n.side-link{font-size:14px}\n.app-title p,.panel p,.metric span{font-size:14px}\n.request-item strong,.list-item strong{font-size:14px}\n.request-item small,.list-item small{font-size:12px}\n.chat-bubble p{font-size:15px}\n.chat-compose textarea{font-size:15px}\n#login-form .field input{min-height:50px}\n#login-form .btn{min-height:50px;font-size:15px}\n@media(max-width:600px){.app-main{font-size:15px}.side-link{font-size:13px}.app-title h1{font-size:clamp(23px,6vw,29px)}.panel p,.app-title p{font-size:14px}.metric span{font-size:12px}}\n</style>
 </head>
 <body>
 <div class="topbar"><div class="container"><span>RÉPUBLIQUE DÉMOCRATIQUE DU CONGO · VILLE-PROVINCE DE KINSHASA</span><span>Ensemble pour un environnement propre et sain</span></div></div>
@@ -303,8 +303,8 @@ let supabaseConnectionState="checking";
 function initSupabaseConnection(){
   try{
     if(!window.supabase || !window.supabase.createClient) throw new Error("Bibliothèque Supabase indisponible. Vérifiez votre connexion Internet.");
-    tosalaSupabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-    tosalaSupabase.auth.onAuthStateChange((event)=>{if(event==="PASSWORD_RECOVERY")showPasswordRecovery();if(event==="SIGNED_IN")setTimeout(()=>syncOfflineReports(),1200);});
+    tosalaSupabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+    tosalaSupabase.auth.onAuthStateChange((event,session)=>{if(event==="PASSWORD_RECOVERY")showPasswordRecovery();if(event==="SIGNED_IN")setTimeout(()=>syncOfflineReports(),1200);if(event==="INITIAL_SESSION"&&session?.user)setTimeout(()=>restoreTosalaSession(session.user),0);});
     checkSupabaseConnection();
   }catch(error){
     supabaseConnectionState="error";
@@ -338,7 +338,7 @@ function saveDB(){localStorage.setItem(STORAGE_KEY,JSON.stringify(db))}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function goHome(){document.getElementById("application").classList.add("hidden");document.getElementById("public-page").classList.remove("hidden");document.querySelector("header").classList.remove("hidden");document.querySelector("footer").classList.remove("hidden");window.scrollTo(0,0);setTimeout(initMap,100)}
 function openRegister(role){closeModal("login-modal");document.getElementById("register-modal").classList.add("show");if(role){const r=document.querySelector('input[name="regRole"][value="'+role+'"]');if(r){r.checked=true;syncRole()}}}
-function openLogin(role){closeModal("register-modal");document.getElementById("login-modal").classList.add("show");if(role==="admin"){document.getElementById("login-role").value="admin";toggleAdminHint()}}
+function openLogin(role){closeModal("register-modal");const remembered=localStorage.getItem("tosala-last-email")||"";const emailInput=document.getElementById("login-id");if(emailInput&&!emailInput.value)emailInput.value=remembered;document.getElementById("login-modal").classList.add("show");if(role==="admin"){document.getElementById("login-role").value="admin";toggleAdminHint()}setTimeout(()=>{if(emailInput&&!emailInput.value)emailInput.focus();else document.getElementById("login-password")?.focus();},120)}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
 function backdropClose(e,id){if(e.target.id===id)closeModal(id)}
 function syncRole(){}
@@ -437,6 +437,7 @@ async function login(e){
   const feedback=document.getElementById("login-feedback");
   const email=document.getElementById("login-id").value.trim().toLowerCase();
   const pw=document.getElementById("login-password").value;
+  if(email){localStorage.setItem("tosala-last-email",email);}
   if(!tosalaSupabase){feedback.innerHTML='<p class="form-note" style="color:#bd3333">Le service de connexion est momentanément indisponible. Vérifiez votre connexion Internet puis réessayez.</p>';return;}
   if(!email||!pw){feedback.innerHTML='<p class="form-note" style="color:#bd3333">Veuillez saisir votre adresse e-mail et votre mot de passe pour continuer.</p>';return;}
   const button=e.target.querySelector('button[type="submit"]');
@@ -496,6 +497,25 @@ async function login(e){
   }finally{
     button.disabled=false;button.textContent="Se connecter";
   }
+}
+async function restoreTosalaSession(user){
+  if(!tosalaSupabase||currentUser||!user?.id)return;
+  try{
+    const {data:profile,error}=await tosalaSupabase.from("profiles").select("*").eq("user_id",user.id).maybeSingle();
+    if(error)throw error;
+    const role=String(profile?.role||"").toLowerCase();
+    if(!profile||profile.approuve!==true||!["ambassador","volunteer","admin","super_admin","ambassadeur","volontaire"].includes(role)){
+      await tosalaSupabase.auth.signOut();
+      return;
+    }
+    const normalizedRole=role==="ambassadeur"?"ambassador":role==="volontaire"?"volunteer":role;
+    const meta=user.user_metadata||{};
+    currentUser={id:user.id,email:user.email,role:normalizedRole,name:profile.nom_complet||meta.full_name||[meta.first_name,meta.post_name,meta.last_name].filter(Boolean).join(" ")||user.email,phone:profile.telephone||meta.phone||"",commune:meta.commune||("Commune ID "+(profile.commune_id??"à confirmer")),communeId:profile.commune_id??null,avatarUrl:profile.avatar_url||null,avatarPath:profile.avatar_path||null};
+    if(user.email)localStorage.setItem("tosala-last-email",user.email);
+    renderApp();
+    startPresenceTracking();
+    if(["admin","super_admin"].includes(normalizedRole))startAdminPresenceMonitor();
+  }catch(error){console.warn("Restauration de session TOSALA:",error);}
 }
 function renderApp(){
   document.getElementById("public-page").classList.add("hidden");
